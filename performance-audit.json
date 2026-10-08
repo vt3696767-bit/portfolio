@@ -1,0 +1,75 @@
+{
+  "date": "2026-10-08",
+  "before": {
+    "heroBytes": 7623509,
+    "portraitBytes": 2063677,
+    "videos": {
+      "cat-cafe": 25600923,
+      "lost-memory": 64451326,
+      "combat-study": 35547949,
+      "fashion-film": 10143372
+    },
+    "publicBytes": 147991289,
+    "bundles": {
+      "AeroShards-CpuAIxbP.js": {
+        "bytes": 206722,
+        "gzipBytes": 65064
+      },
+      "index-BozDe541.js": {
+        "bytes": 382005,
+        "gzipBytes": 129383
+      }
+    },
+    "fontFilesBytes": 434308,
+    "cssBytes": 41026
+  },
+  "after": {
+    "heroBytes": 430986,
+    "heroRetinaBytes": 901474,
+    "portraitBytes": 120418,
+    "videos": {
+      "cat-cafe": 17455334,
+      "lost-memory": 40769902,
+      "combat-study": 25063537,
+      "fashion-film": 6895566
+    },
+    "publicBytes": 93269056,
+    "fontFilesBytes": 71372,
+    "cssBytes": 32624,
+    "bundles": {
+      "AeroShards-BlAK8Vq9.js": {
+        "bytes": 206906,
+        "gzipBytes": 65142
+      },
+      "index-CL41AdTN.js": {
+        "bytes": 383578,
+        "gzipBytes": 129863
+      }
+    },
+    "buildBytes": 93893975
+  },
+  "verified": {
+    "productionBuild": true,
+    "motionAndMediaChecks": 13,
+    "performanceContracts": 5,
+    "completeVideoDecode": [
+      "cat-cafe",
+      "lost-memory",
+      "combat-study",
+      "fashion-film"
+    ],
+    "videoByteRangeRequests": true,
+    "imageAndFontDelivery": true,
+    "originalArchiveHashes": true,
+    "imageAndVideoFrameInspection": true
+  },
+  "notMeasured": [
+    "LCP",
+    "CLS",
+    "INP",
+    "actualFPS",
+    "GPU memory",
+    "Lighthouse score"
+  ],
+  "browserLimitation": "Browser preview connection failed with process security environment error 0x80070020."
+}

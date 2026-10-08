@@ -1,0 +1,46 @@
+.music-player {
+  position: fixed;
+  right: max(clamp(24px, 4.9vw, 95px), calc((100vw - 1700px) / 2));
+  bottom: max(88px, calc(28px + env(safe-area-inset-bottom)));
+  z-index: 45;
+  width: 256px;
+  color: var(--ink);
+  transition: opacity .35s ease, visibility .35s ease;
+}
+.portfolio-page[data-opening="playing"] .music-player,
+.music-player.is-suspended { opacity: 0; visibility: hidden; pointer-events: none; }
+.music-player audio { display: none; }
+.music-bar { display: flex; align-items: stretch; background: var(--primary-light); border: 1px solid rgb(51 43 27 / 18%); border-radius: 50px; box-shadow: 0 6px 24px rgb(30 26 17 / 13%); }
+.music-toggle { display: flex; align-items: center; gap: 11px; flex: 1; min-width: 0; padding: 8px 6px 8px 9px; border: 0; border-radius: 50px 0 0 50px; background: transparent; text-align: left; transition: background-color .25s ease, color .25s ease; }
+.music-disc { width: 36px; height: 36px; flex-shrink: 0; border: 1px solid currentColor; border-radius: 50%; display: grid; place-items: center; }
+.music-disc.is-playing { background: var(--ink); color: var(--primary-light); border-color: var(--ink); }
+.music-toggle:is(:hover, :focus-visible) { background: var(--ink); color: var(--primary-light); }
+.music-toggle:is(:hover, :focus-visible) .music-disc { border-color: currentColor; }
+.music-track { display: grid; gap: 1px; min-width: 0; line-height: 1.5; }
+.music-track > span:first-child { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: .8rem; letter-spacing: .025em; }
+.music-track > span:last-child { font-size: .65rem; opacity: .8; letter-spacing: .035em; }
+.music-loop { font-size: .6rem; letter-spacing: .09em; }
+.music-volume-button { display: grid; place-items: center; width: 43px; flex-shrink: 0; border: 0; border-left: 1px solid rgb(51 43 27 / 15%); border-radius: 0 50px 50px 0; background: transparent; transition: background-color .25s ease, color .25s ease; }
+.music-volume-button:is(:hover, :focus-visible), .music-volume-button[aria-expanded="true"] { background: var(--ink); color: var(--primary-light); }
+.music-player button:focus-visible { outline-color: var(--primary-light); outline-offset: 3px; }
+.music-settings { margin-bottom: 12px; padding: 18px 20px 19px; border: 1px solid var(--line); border-radius: 16px; background: var(--paper); box-shadow: 0 8px 30px rgb(30 26 17 / 14%); }
+.music-settings-heading { display: flex; justify-content: space-between; gap: 12px; align-items: flex-start; margin-bottom: 18px; }
+.music-settings-heading p { font-size: .8125rem; }
+.music-settings-heading p > span { display: block; color: var(--muted); font-size: .65rem; letter-spacing: .04em; margin-top: 4px; }
+.music-settings-close { display: grid; place-items: center; width: 30px; height: 30px; margin: -4px -5px 0 0; border: 0; background: transparent; border-radius: 50%; font-size: 1.5rem; line-height: 1; transition: background-color .25s ease, color .25s ease; }
+.music-settings-close:is(:hover, :focus-visible) { background: var(--ink); color: var(--primary-light); }
+.music-settings button:focus-visible { outline-color: var(--ink); }
+.music-settings label { display: flex; justify-content: space-between; font-size: .75rem; margin-bottom: 10px; }
+.music-settings output { color: var(--muted); font-variant-numeric: tabular-nums; }
+.music-settings input { display: block; width: 100%; height: 6px; margin: 12px 0 6px; border-radius: 9px; appearance: none; background: linear-gradient(to right, var(--accent) var(--music-volume), var(--line) var(--music-volume)); cursor: pointer; }
+.music-settings input::-webkit-slider-thumb { appearance: none; width: 15px; height: 15px; border: 2px solid var(--paper); border-radius: 50%; background: var(--ink); box-shadow: 0 0 0 1px var(--ink); }
+.music-settings input::-moz-range-thumb { width: 11px; height: 11px; border: 2px solid var(--paper); border-radius: 50%; background: var(--ink); box-shadow: 0 0 0 1px var(--ink); }
+.music-status { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+@media (max-width: 720px) {
+  .music-player { width: 232px; right: 20px; bottom: max(112px, calc(26px + env(safe-area-inset-bottom))); }
+  .music-track > span:first-child { font-size: .75rem; }
+  .music-loop { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .music-player, .music-player button { transition: none; }
+}

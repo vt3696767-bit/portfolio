@@ -1,0 +1,327 @@
+{
+  "generator": "built-in image_gen",
+  "calls": 3,
+  "variants": 0,
+  "retries": 0,
+  "status": "generated demonstration assets retained as backups; selected works use user-supplied films and original-frame posters",
+  "images": [
+    {
+      "key": "portfolio_hero",
+      "path": "C:/Users/SYJ/.codex/visualizations/2026/10/07/01a116f8-965e-71d1-afe0-086b4f92f482/portfolio-hero-desert-ribbon.png",
+      "width": 1672,
+      "height": 941,
+      "format": "PNG",
+      "bytes": 1957308,
+      "prompt": "Use case: photorealistic-natural\nAsset type: standalone cinematic fine-art still for a portfolio website hero, demonstration visual\nPrimary request: an immense terracotta and rust-orange fabric circular ribbon sculpture winding across pale desert sand beneath a muted peach dusty sky.\nStyle/medium: photorealistic cinematic fine-art photography, restrained art-house cinema, sophisticated and quiet, high landscape resolution, 16:9 or wider panoramic composition.\nComposition/framing: distant expansive desert, fabric sculpture dominant toward the right half, a small lone distant human silhouette at far right; ample uninterrupted dark-neutral negative space across left and center for later ivory website typography, but do not render typography. Keep the horizon low and the scene elegant.\nLighting/mood: dramatic low sun, long soft shadows, atmospheric dusty warmth, controlled highlights.\nColor palette: warm copper, umber, champagne, muted peach, charcoal taupe shadows.\nMaterials/textures: realistic tactile wind-swept pale sand and heavy woven fabric with natural folds, believable monumental scale.\nConstraints: generate exactly one complete standalone still image; no text, no lettering, no logos, no watermark, no UI, no frame, no collage, no mockup.",
+      "archivedAsset": "assets/source/images/hero.webp"
+    },
+    {
+      "key": "portfolio_cat_cafe",
+      "path": "C:/Users/SYJ/.codex/visualizations/2026/10/07/01a116f8-965e-71d1-afe0-086b4f92f482/portfolio-cat-cafe-cover.png",
+      "width": 1672,
+      "height": 941,
+      "format": "PNG",
+      "bytes": 2264095,
+      "prompt": "Use case: photorealistic-natural\nAsset type: standalone landscape project-cover still for a portfolio website, demonstration visual\nPrimary request: a ginger cat sitting calmly at a wooden counter in an intimate nostalgic coffee shop.\nStyle/medium: cinematic photorealistic art-house still, realistic animal anatomy and fur, elegant editorial photography, high landscape resolution, 16:9 framing, subtle analog film grain.\nScene/backdrop: warm aged wood coffee-shop interior, a tall window and coffee steam, richly shadowed interior.\nComposition/framing: the ginger cat is the focal subject at the counter, visually rich but quiet, landscape cover composition.\nLighting/mood: warm amber afternoon light streaming through the tall window, soft steam catching the light, deep atmospheric shadows.\nColor palette: amber, copper, dark wood, umber, subtle cream highlights.\nConstraints: exactly one complete standalone still image; no people, no text, no lettering, no logos, no watermark, no UI, no border, no collage, no mockup; no cartoon or overly cute stylization.",
+      "archivedAsset": "assets/source/images/cat-cafe.webp"
+    },
+    {
+      "key": "portfolio_urban_memory",
+      "path": "C:/Users/SYJ/.codex/visualizations/2026/10/07/01a116f8-965e-71d1-afe0-086b4f92f482/portfolio-urban-memory-cover.png",
+      "width": 1672,
+      "height": 941,
+      "format": "PNG",
+      "bytes": 2522450,
+      "prompt": "Use case: photorealistic-natural\nAsset type: standalone landscape project-cover still for a portfolio website, demonstration visual\nPrimary request: an art-house photorealistic cinema still of a lone small figure wearing a coat seen from behind in a rain-soaked empty city street at dusk; a large dusty terracotta illuminated circle is visible high above the distant rooftops.\nStyle/medium: elegant surreal realism, high-resolution cinematic photography, 16:9 landscape composition, subtle film grain.\nScene/backdrop: empty rain-wet city street receding toward distant rooftops, atmospheric haze and warm tungsten window lights.\nComposition/framing: lone small coat-wearing figure seen from behind, strong street perspective, illuminated circle hanging high above the far skyline, quiet balanced composition.\nLighting/mood: dusk haze, subdued charcoal shadows, atmospheric tungsten lights reflected in the wet pavement, restrained evocative cinema.\nColor palette: dusty terracotta, warm amber windows, charcoal gray, muted umber, subdued reflections.\nConstraints: exactly one complete standalone still image; no text, no lettering, no logos, no watermark, no UI, no border, no collage, no mockup; no additional people.",
+      "archivedAsset": "assets/source/images/urban-memory.webp"
+    }
+  ],
+  "profileImage": {
+    "source": "user-provided illustration",
+    "projectAsset": "/images/portrait-traveler-720.webp",
+    "width": 720,
+    "height": 998,
+    "preservedOriginal": true,
+    "originalWidth": 890,
+    "originalHeight": 1234,
+    "variants": [
+      {
+        "path": "/images/portrait-traveler-480.webp",
+        "width": 480,
+        "height": 666,
+        "bytes": 60704
+      },
+      {
+        "path": "/images/portrait-traveler-720.webp",
+        "width": 720,
+        "height": 998,
+        "bytes": 120418
+      },
+      {
+        "path": "/images/portrait-traveler-890.webp",
+        "width": 890,
+        "height": 1234,
+        "bytes": 194238
+      }
+    ],
+    "originalAsset": "assets/source/images/portrait-traveler.png"
+  },
+  "heroBackground": {
+    "source": "user-provided image",
+    "projectAsset": "/images/hero-fantasy-1920.webp",
+    "width": 1920,
+    "height": 1076,
+    "mode": "static",
+    "preservedOriginal": true,
+    "originalWidth": 2912,
+    "originalHeight": 1632,
+    "variants": [
+      {
+        "path": "/images/hero-fantasy-960.webp",
+        "width": 960,
+        "height": 538,
+        "bytes": 124738
+      },
+      {
+        "path": "/images/hero-fantasy-1536.webp",
+        "width": 1536,
+        "height": 861,
+        "bytes": 291262
+      },
+      {
+        "path": "/images/hero-fantasy-1920.webp",
+        "width": 1920,
+        "height": 1076,
+        "bytes": 430986
+      },
+      {
+        "path": "/images/hero-fantasy-2560.webp",
+        "width": 2560,
+        "height": 1435,
+        "bytes": 715592
+      },
+      {
+        "path": "/images/hero-fantasy-2912.webp",
+        "width": 2912,
+        "height": 1632,
+        "bytes": 901474
+      }
+    ],
+    "originalAsset": "assets/source/images/hero-fantasy.png"
+  },
+  "projectFilms": [
+    {
+      "id": "cat-cafe",
+      "source": "F:\\Midjourney-win-v2.5.2免安装版本\\视频\\猫知道\\猫知道.mp4",
+      "sourceBytes": 86236745,
+      "sourceDurationSeconds": 70.46000000000001,
+      "projectAsset": "/videos/projects/cat-cafe-web.mp4",
+      "bytes": 17455334,
+      "width": 1280,
+      "height": 720,
+      "durationSeconds": 70.42,
+      "codec": "H.264 / AAC",
+      "fastStart": true,
+      "audio": "original AAC stream copied",
+      "webPlaybackVersion": true,
+      "sourceFileModified": false,
+      "poster": "/images/projects/cat-cafe.webp",
+      "posterSize": [
+        1280,
+        720
+      ],
+      "posterTimestampSeconds": 46.5,
+      "encoding": {
+        "crf": 23,
+        "preset": "medium",
+        "peakBitrateKbps": 4500
+      },
+      "previousWebVersion": "assets/source/videos/projects/cat-cafe.mp4"
+    },
+    {
+      "id": "lost-memory",
+      "source": "F:\\Midjourney-win-v2.5.2免安装版本\\视频\\遗忘\\重新认识一下.mp4",
+      "sourceBytes": 1353225550,
+      "sourceDurationSeconds": 140.04,
+      "projectAsset": "/videos/projects/lost-memory-web.mp4",
+      "bytes": 40769902,
+      "width": 1880,
+      "height": 1080,
+      "durationSeconds": 140.04,
+      "codec": "H.264 / AAC",
+      "fastStart": true,
+      "audio": "original AAC stream copied",
+      "webPlaybackVersion": true,
+      "sourceFileModified": false,
+      "poster": "/images/projects/lost-memory-portrait.webp",
+      "posterSize": [
+        1280,
+        734
+      ],
+      "posterTimestampSeconds": 107.0,
+      "posterSelection": "user-selected shot from browser annotation",
+      "encoding": {
+        "crf": 23,
+        "preset": "medium",
+        "peakBitrateKbps": 4500
+      },
+      "previousWebVersion": "assets/source/videos/projects/lost-memory.mp4"
+    },
+    {
+      "id": "combat-study",
+      "source": "F:\\Midjourney-win-v2.5.2免安装版本\\视频\\打斗素材\\战斗练习1.mp4",
+      "sourceBytes": 74894391,
+      "sourceDurationSeconds": 83.99,
+      "projectAsset": "/videos/projects/combat-study-web.mp4",
+      "bytes": 25063537,
+      "width": 1470,
+      "height": 630,
+      "durationSeconds": 84.01,
+      "codec": "H.264 / AAC",
+      "fastStart": true,
+      "audio": "original AAC stream copied",
+      "webPlaybackVersion": true,
+      "sourceFileModified": false,
+      "poster": "/images/projects/combat-study-duel.webp",
+      "posterSize": [
+        1280,
+        548
+      ],
+      "posterTimestampSeconds": 56.75,
+      "posterSelection": "user-selected shot from browser annotation",
+      "encoding": {
+        "crf": 23,
+        "preset": "medium",
+        "peakBitrateKbps": 4500
+      },
+      "previousWebVersion": "assets/source/videos/projects/combat-study.mp4"
+    },
+    {
+      "id": "fashion-film",
+      "source": "F:\\Midjourney-win-v2.5.2免安装版本\\视频\\时装\\时尚短片.mp4",
+      "sourceBytes": 42047913,
+      "sourceDurationSeconds": 41.94,
+      "projectAsset": "/videos/projects/fashion-film-web.mp4",
+      "bytes": 6895566,
+      "width": 1282,
+      "height": 720,
+      "durationSeconds": 41.96,
+      "codec": "H.264 / AAC",
+      "fastStart": true,
+      "audio": "original AAC stream copied",
+      "webPlaybackVersion": true,
+      "sourceFileModified": false,
+      "poster": "/images/projects/fashion-film-closeup.webp",
+      "posterSize": [
+        1280,
+        718
+      ],
+      "posterTimestampSeconds": 17.0,
+      "posterSelection": "user-selected shot from browser annotation",
+      "encoding": {
+        "crf": 23,
+        "preset": "medium",
+        "peakBitrateKbps": 4500
+      },
+      "previousWebVersion": "assets/source/videos/projects/fashion-film.mp4"
+    }
+  ],
+  "archivedAssets": [
+    {
+      "path": "assets/source/images/hero-fantasy.png",
+      "bytes": 7623509,
+      "sha256": "61c77360077415c4fc26e615a16149fe0148fd6efb204f16e5b8f199a133b689"
+    },
+    {
+      "path": "assets/source/images/portrait-traveler.png",
+      "bytes": 2063677,
+      "sha256": "9c3f5b029f48191b528890aec3edbc826f3ef1ee6ae8c2eff6baec4965a1cf80"
+    },
+    {
+      "path": "assets/source/images/portrait.jpg",
+      "bytes": 5372,
+      "sha256": "5ae25ab677922385a299c7538c74ea4d194dab3142fc3856eeba20bf2dc25b26"
+    },
+    {
+      "path": "assets/source/images/hero.webp",
+      "bytes": 133070,
+      "sha256": "5bebf2ababcd4af8fdfe13ced8b26ab0dcdbf2c727599163eb08787b12a47d3e"
+    },
+    {
+      "path": "assets/source/images/cat-cafe.webp",
+      "bytes": 237414,
+      "sha256": "9e313a2d9708655fdb0b2ab529f89cfdf9f3f67edd2d40009f483d637e1c38be"
+    },
+    {
+      "path": "assets/source/images/urban-memory.webp",
+      "bytes": 285872,
+      "sha256": "e6fd46853a89129349051547a767022faa06bb52529351e97e3ba746059778cf"
+    },
+    {
+      "path": "assets/source/images/projects/lost-memory.webp",
+      "bytes": 53886,
+      "sha256": "2c1783b358b6d09debd9b5e37b00f666e27d06dae28cd9320f65847346d6e8c1"
+    },
+    {
+      "path": "assets/source/images/projects/combat-study.webp",
+      "bytes": 83346,
+      "sha256": "53c9243ce370b2b6380c4f0e3420410d0f538b595baafa66efab3f0ccd352fc4"
+    },
+    {
+      "path": "assets/source/images/projects/fashion-film.webp",
+      "bytes": 50412,
+      "sha256": "472ef961a83e121a0e6c416dc41b3a78ec13a49a31b322dad9d96270e6cc089f"
+    },
+    {
+      "path": "assets/source/videos/hero-loop.mp4",
+      "bytes": 1546115,
+      "sha256": "5fd6158a40ac29e64ea5879525f30867ea474bc1544e97ce4d095f81878d3c9e"
+    },
+    {
+      "path": "assets/source/videos/projects/cat-cafe.mp4",
+      "bytes": 25600923,
+      "sha256": "2c0c87dff278870689f8f5c908bac9635124673fe4954e26214d97bb13c32ae8"
+    },
+    {
+      "path": "assets/source/videos/projects/lost-memory.mp4",
+      "bytes": 64451326,
+      "sha256": "9b70906f7e510a413eedbc27e08d3a5c207d35bb56833df855e7388bc15fae8e"
+    },
+    {
+      "path": "assets/source/videos/projects/combat-study.mp4",
+      "bytes": 35547949,
+      "sha256": "79eb58ef42caf419598cf7b23d5a8bd5722dc9400bfa9404e01189dbde6e20a1"
+    },
+    {
+      "path": "assets/source/videos/projects/fashion-film.mp4",
+      "bytes": 10143372,
+      "sha256": "9833d625a02b3d5d503f622c88b9d0c4afb1084808f1234248f8cd7f5dd61454"
+    },
+    {
+      "path": "assets/source/audio/isekai-life.wav",
+      "bytes": 25799884,
+      "sha256": "a531bb6769ea5fd81137181487028d5e45ba3eb26fbc320c1d01f19d8540f3a2"
+    }
+  ],
+  "performanceOptimized": true,
+  "backgroundMusic": {
+    "title": "异世界生活小曲",
+    "source": "C:\\Users\\SYJ\\Downloads\\异世界生活小曲.wav",
+    "sourceBytes": 25799884,
+    "sourceDurationSeconds": 134.3735,
+    "sourceFileModified": false,
+    "sourceSha256": "a531bb6769ea5fd81137181487028d5e45ba3eb26fbc320c1d01f19d8540f3a2",
+    "originalAsset": "assets/source/audio/isekai-life.wav",
+    "projectAsset": "/audio/isekai-life.mp3",
+    "bytes": 3226221,
+    "codec": "MP3 (libmp3lame)",
+    "bitrateKbps": 192,
+    "sampleRate": 48000,
+    "channels": 2,
+    "webPlaybackVersion": true,
+    "preservedCompleteSong": true,
+    "loading": "only after user playback request; preload none; no initial src",
+    "loop": true,
+    "defaultVolume": 0.3
+  }
+}

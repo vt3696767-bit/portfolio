@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#f8f0d6" />
+    <meta name="description" content="盛勇杰的个人作品集。AI 内容生成、AI 视觉设计与 AIGC 编导，从选题、剧本和分镜，到画面生成、剪辑与声音。" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="preload" as="image" href="/images/hero-fantasy-1920.webp" imagesrcset="/images/hero-fantasy-960.webp 960w, /images/hero-fantasy-1536.webp 1536w, /images/hero-fantasy-1920.webp 1920w, /images/hero-fantasy-2560.webp 2560w, /images/hero-fantasy-2912.webp 2912w" imagesizes="100vw" fetchpriority="high" />
+    <link rel="preload" as="font" href="/fonts/cormorant-latin.woff2" type="font/woff2" crossorigin />
+    <title>盛勇杰 · AI 影像与视觉创作</title>
+    <script id="initial-scroll">
+      (() => {
+        const showHero = () => {
+          if ('scrollRestoration' in window.history) window.history.scrollRestoration = 'manual';
+          if (window.location.hash) {
+            window.history.replaceState(window.history.state, '', window.location.pathname + window.location.search);
+          }
+          window.scrollTo({ left: 0, top: 0, behavior: 'instant' });
+        };
+        // Run before React and ScrollTrigger read the initial page position.
+        showHero();
+        window.addEventListener('pageshow', event => {
+          if (event.persisted) showHero();
+        });
+      })();
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>
