@@ -6,7 +6,7 @@
   "packageManager": "pnpm@11.25.0",
   "scripts": {
     "dev": "vite --host 127.0.0.1 --port 5173 --strictPort",
-    "build": "vite build",
+    "build": "vite build && node scripts/check-pages-assets.mjs",
     "preview": "vite preview --host 127.0.0.1 --port 4173 --strictPort",
     "test:motion": "node --test tests/motion.test.mjs",
     "test:media": "node --test tests/project-media.test.mjs",

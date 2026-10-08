@@ -144,9 +144,9 @@
       "sourceBytes": 1353225550,
       "sourceDurationSeconds": 140.04,
       "projectAsset": "/videos/projects/lost-memory-web.mp4",
-      "bytes": 40769902,
-      "width": 1880,
-      "height": 1080,
+      "bytes": 24587005,
+      "width": 1280,
+      "height": 734,
       "durationSeconds": 140.04,
       "codec": "H.264 / AAC",
       "fastStart": true,
@@ -161,11 +161,17 @@
       "posterTimestampSeconds": 107.0,
       "posterSelection": "user-selected shot from browser annotation",
       "encoding": {
-        "crf": 23,
+        "mode": "two-pass",
         "preset": "medium",
-        "peakBitrateKbps": 4500
+        "targetBitrateKbps": 1200,
+        "peakBitrateKbps": 2400,
+        "bufferKbps": 4800
       },
-      "previousWebVersion": "assets/source/videos/projects/lost-memory.mp4"
+      "previousWebVersion": "assets/source/videos/projects/lost-memory.mp4",
+      "fps": 30,
+      "cloudflarePagesCompatible": true,
+      "completeDecodePassed": true,
+      "sha256": "f52024a54b7181c1f8629be3d2842557f8bb5984e01d1011ec4036bcafcfecf1"
     },
     {
       "id": "combat-study",
@@ -323,5 +329,13 @@
     "loading": "only after user playback request; preload none; no initial src",
     "loop": true,
     "defaultVolume": 0.3
+  },
+  "cloudflarePagesCompatibility": {
+    "assetSizeLimitBytes": 26214400,
+    "docs": "https://developers.cloudflare.com/pages/platform/limits/#file-size",
+    "buildValidationScript": "scripts/check-pages-assets.mjs",
+    "correctedAsset": "/videos/projects/lost-memory-web.mp4",
+    "beforeBytes": 40769902,
+    "afterBytes": 24587005
   }
 }
