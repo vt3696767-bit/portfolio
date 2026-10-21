@@ -72,7 +72,7 @@ Cloudflare Pages 的[单个静态文件上限为 25 MiB](https://developers.clou
 
 `pnpm test:music` 检查音频资源、点击后加载、音量边界、视频播放时暂停及恢复、后台暂停、快速切换与异步播放竞争、失败重试和卸载清理。音乐与视频切换顺序也包含在 test:performance 的页面集成检查中。
 
-`pnpm test:performance` 检查背景 SVG 不启用 GPU、预载与页面选图一致性、像素卡片按需初始化与绘制节流、导航阈值观察、八个作品及首屏入口按需播放、与背景音乐的切换顺序、两类作品标识和数量。旧 AeroShards 的像素预算单元检查保留，但该背景已不挂载。这些是模拟 DOM 与资源检查，不是实际浏览器帧率或 Lighthouse 测试。详细审查见 `PERFORMANCE.md`。
+`pnpm test:performance` 检查背景 SVG 不启用 GPU、预载与页面选图一致性、像素卡片按需初始化与绘制节流、导航阈值观察、八个作品及首屏入口按需播放、与背景音乐的切换顺序、两类作品标识和数量。旧 AeroShards 的像素预算检查已替换为当前入口不导入 GPU 模块的检查。这些是模拟 DOM 与资源检查，不是实际浏览器帧率或 Lighthouse 测试。详细审查见 `PERFORMANCE.md`。
 
 ## 真实信息与示意素材
 
