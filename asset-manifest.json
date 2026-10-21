@@ -67,6 +67,7 @@
     "originalAsset": "assets/source/images/portrait-traveler.png"
   },
   "heroBackground": {
+    "status": "previous design retained; not requested by current gallery homepage",
     "source": "user-provided image",
     "projectAsset": "/images/hero-fantasy-1920.webp",
     "width": 1920,
@@ -108,6 +109,23 @@
       }
     ],
     "originalAsset": "assets/source/images/hero-fantasy.png"
+  },
+  "galleryHero": {
+    "source": "user-supplied Western fantasy film, original-color frame",
+    "sourceFilm": "western-fantasy",
+    "sourceFile": "F:/Midjourney-win-v2.5.2免安装版本/视频/作品集/2.5测试镜头/西式奇幻.mp4",
+    "frameSeconds": 37.21,
+    "projectAsset": "/images/hero-gallery-1280.webp",
+    "width": 1280,
+    "height": 720,
+    "mode": "static responsive still inside CSS arch; video loads on click only",
+    "variants": [
+      { "path": "/images/hero-gallery-640.webp", "width": 640, "height": 360, "bytes": 20032 },
+      { "path": "/images/hero-gallery-960.webp", "width": 960, "height": 540, "bytes": 31644 },
+      { "path": "/images/hero-gallery-1280.webp", "width": 1280, "height": 720, "bytes": 46012 }
+    ],
+    "designReference": "04B-西方古典画廊-镂空符号深化.png, approved by user on 2026-10-21",
+    "ornaments": "native static SVG quatrefoil and S maker mark; no generated webpage bitmap used as background"
   },
   "projectFilms": [
     {

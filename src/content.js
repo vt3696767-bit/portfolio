@@ -9,8 +9,10 @@ export const profile = {
   portrait: '/images/portrait-traveler-720.webp',
   portraitSrcSet: '/images/portrait-traveler-480.webp 480w, /images/portrait-traveler-720.webp 720w, /images/portrait-traveler-890.webp 890w',
   portraitAlt: '戴宽檐帽的旅行者彩色插画',
-  heroPoster: '/images/hero-fantasy-1920.webp',
-  heroPosterSrcSet: '/images/hero-fantasy-960.webp 960w, /images/hero-fantasy-1536.webp 1536w, /images/hero-fantasy-1920.webp 1920w, /images/hero-fantasy-2560.webp 2560w, /images/hero-fantasy-2912.webp 2912w',
+  heroPoster: '/images/hero-gallery-1280.webp',
+  heroPosterSrcSet: '/images/hero-gallery-640.webp 640w, /images/hero-gallery-960.webp 960w, /images/hero-gallery-1280.webp 1280w',
+  // The arch crops a landscape still: select for its drawn width, not just the frame width.
+  heroPosterSizes: '(max-width: 720px) 800px, 1400px',
   heroVideo: null,
 };
 

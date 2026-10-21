@@ -1,12 +1,10 @@
-import { lazy, memo, Suspense, useEffect, useRef, useState } from 'react';
+import { memo, useEffect, useRef, useState } from 'react';
 import { backgroundMusic, capabilities, experiences, profile, projects } from './content';
-import ShardFallback from './components/AeroShards/ShardFallback';
+import { GalleryDivider, GalleryOrnament, RosetteMark } from './components/GalleryOrnament';
 import PixelCard from './components/PixelCard/PixelCard';
 import BackgroundMusic from './components/BackgroundMusic/BackgroundMusic';
 import usePortfolioMotion from './motion/usePortfolioMotion';
 import { attachProjectPlayback } from './media/projectPlayback';
-
-const AeroShards = lazy(() => import('./components/AeroShards/AeroShards'));
 
 function Icon({ name, size = 24, ...props }) {
   const paths = {
@@ -47,146 +45,59 @@ const Header = memo(function Header({ active }) {
     if (scrollMarker.current) observer.observe(scrollMarker.current);
     return () => observer.disconnect();
   }, []);
-  const links = [{ id: 'about', label: '关于我' }, { id: 'work', label: '精选作品' }, { id: 'approach', label: '创作能力' }];
+  const links = [{ id: 'work', label: '精选作品' }, { id: 'about', label: '关于我' }, { id: 'approach', label: '创作能力' }];
   return <><span ref={scrollMarker} className="header-scroll-marker" aria-hidden="true" /><header className={`site-header ${scrolled ? 'is-scrolled' : ''} ${menuOpen ? 'menu-open' : ''}`}>
     <div className="header-inner container">
-      <a className="brand" href="#home" onClick={() => setMenuOpen(false)} aria-label="盛勇杰，回到首页"><span className="brand-mark">S.</span><span className="brand-text">盛勇杰<span>CREATIVE PORTFOLIO</span></span></a>
+      <a className="brand" href="#home" onClick={() => setMenuOpen(false)} aria-label="盛勇杰，回到首页"><span className="brand-text">盛勇杰<span>SHENG YONGJIE</span></span></a>
       <nav className="desktop-nav" aria-label="主导航">{links.map(link => <a key={link.id} className={active === link.id ? 'active' : ''} href={`#${link.id}`} aria-current={active === link.id ? 'location' : undefined}>{link.label}</a>)}</nav>
-      <a className="header-contact" href="#contact" onClick={() => setMenuOpen(false)}>聊聊你的想法<span className="contact-star" aria-hidden="true">✳</span></a>
+      <a className="header-contact" href="#contact" onClick={() => setMenuOpen(false)} aria-label="联系盛勇杰"><span>联系</span><RosetteMark /></a>
       <button className="menu-toggle" aria-label={menuOpen ? '关闭导航' : '打开导航'} aria-expanded={menuOpen} aria-controls="mobile-nav" onClick={() => setMenuOpen(v => !v)}><Icon name={menuOpen ? 'close' : 'menu'} /></button>
     </div>
     {menuOpen && <nav id="mobile-nav" className="mobile-nav" aria-label="移动端导航">{[...links, { id: 'contact', label: '联系我' }].map(link => <a key={link.id} href={`#${link.id}`} onClick={() => setMenuOpen(false)}>{link.label}</a>)}</nav>}
   </header></>;
 });
 
-function Hero() {
-  const hasVideo = Boolean(profile.heroVideo);
-  const video = useRef(null);
-  const [paused, setPaused] = useState(() => window.matchMedia('(prefers-reduced-motion: reduce)').matches);
-  const [ready, setReady] = useState(false);
-  const [unavailable, setUnavailable] = useState(false);
-  useEffect(() => {
-    const element = video.current;
-    if (!element || unavailable) return;
-    const update = () => {
-      if (paused || document.hidden) element.pause();
-      else element.play().catch(() => setPaused(true));
-    };
-    update();
-    document.addEventListener('visibilitychange', update);
-    return () => document.removeEventListener('visibilitychange', update);
-  }, [paused, unavailable, hasVideo]);
-  useEffect(() => {
-    if (!hasVideo) return;
-    const media = window.matchMedia('(prefers-reduced-motion: reduce)');
-    const update = () => { if (media.matches) setPaused(true); };
-    media.addEventListener('change', update);
-    return () => media.removeEventListener('change', update);
-  }, [hasVideo]);
+function Hero({ onSelect }) {
+  const heroProject = projects.find(project => project.id === 'western-fantasy');
   return <section className="hero" id="home" aria-labelledby="hero-title">
-    <div className="opening-curtain" aria-hidden="true"><div className="opening-identity"><span className="opening-mark-mask"><span className="opening-mark">S.</span></span><span className="opening-caption-mask"><span className="opening-caption">{profile.englishName}</span></span></div><div className="opening-meta container"><span>CREATIVE PORTFOLIO / {new Date().getFullYear()}</span><span>AI FILM & VISUAL CREATION</span></div></div>
-    <div className="hero-media" aria-hidden="true">
-      <img className="hero-poster" src={profile.heroPoster} srcSet={profile.heroPosterSrcSet} sizes="100vw" width="2912" height="1632" alt="" fetchPriority="high" decoding="async" />
-      {hasVideo && <video ref={video} className={ready ? 'is-ready' : ''} muted loop playsInline autoPlay={!paused} preload="metadata" poster={profile.heroPoster} onPlaying={() => setReady(true)} onError={() => { setUnavailable(true); setPaused(true); }}><source src={profile.heroVideo} type="video/mp4" /></video>}
+    <GalleryOrnament position="hero" />
+    <div className="opening-curtain" aria-hidden="true"><div className="opening-identity"><span className="opening-mark-mask"><span className="opening-mark"><RosetteMark /></span></span><span className="opening-caption-mask"><span className="opening-caption">{profile.englishName}</span></span></div><div className="opening-meta container"><span>PORTFOLIO / {new Date().getFullYear()}</span><span>AI FILM & VISUAL CREATION</span></div></div>
+    <div className="hero-inner container">
+      <div className="hero-copy">
+        <p className="hero-eyebrow">AI FILMMAKER<br />&amp; DESIGNER</p>
+        <div className="hero-identity">
+          <div className="hero-name-mask"><h1 className="hero-name" id="hero-title">{profile.name}</h1></div>
+          <p className="hero-english">{profile.englishName}</p>
+          <p className="hero-roles">{profile.roles.map(role => <span key={role}>{role}</span>)}</p>
+        </div>
+        <span className="hero-rule" aria-hidden="true" />
+        <MaskedHeading as="p" className="hero-heading" lines={['让想象，', '成为画面。']} />
+        <p className="hero-intro">在想象与现实之间，<br />探索影像的更多可能。</p>
+        <a href="#work" className="hero-cta">观看作品 <span aria-hidden="true">↗</span></a>
+      </div>
+      <div className="hero-art">
+        <span className="hero-side-mark" aria-hidden="true">✦</span>
+        <div className="hero-arch"><div className="hero-media"><img className="hero-poster" src={profile.heroPoster} srcSet={profile.heroPosterSrcSet} sizes={profile.heroPosterSizes} width="1280" height="720" alt="《西式奇幻》原片画面：窗光中手捧织物的女性" fetchPriority="high" decoding="async" /></div></div>
+        <div className="hero-art-caption"><span>FRAME NO. 08</span><span>西式奇幻 / {heroProject.durationLabel}</span></div>
+        <button className="hero-art-play" onClick={() => onSelect(heroProject)} aria-label="播放《西式奇幻》影像片段" aria-haspopup="dialog"><Icon name="play" size={18} /><span>观看原片</span></button>
+      </div>
     </div>
-    <div className="hero-shade" />
-    <div className="hero-main container">
-      <p className="hero-eyebrow"><span className="eyebrow-dash" />AI FILM & VISUAL CREATION</p>
-      <div className="hero-title-row"><MaskedHeading as="h1" id="hero-title" className="hero-heading" lines={['让想象，', '成为画面。']} /><span className="hero-period" aria-hidden="true">✳</span></div>
-      <div className="hero-intro"><p>我是盛勇杰。<br />在想象与现实之间，探索影像的更多可能。</p></div>
-      <a href="#work" className="hero-cta">探索我的作品 <span className="small-plus" aria-hidden="true">+</span></a>
-    </div>
-    <div className="hero-bottom container">
-      <div className="hero-roles">{profile.roles.map(role => <span key={role}>{role}</span>)}</div>
-      <a className="scroll-cue" href="#about"><span className="scroll-line" aria-hidden="true" />向下探索</a>
-      {hasVideo && !unavailable && <button className="video-control" onClick={() => setPaused(p => !p)} aria-label={paused ? '播放背景视频' : '暂停背景视频'} aria-pressed={paused}><Icon name={paused ? 'play' : 'pause'} size={17} /><span>{paused ? '播放' : '暂停'}背景影像</span></button>}
-    </div>
+    <div className="hero-bottom container"><GalleryDivider /><a className="scroll-cue" href="#work">探索影像 <span aria-hidden="true">↓</span></a></div>
   </section>;
 }
 
-const ContentBackground = memo(function ContentBackground() {
-  const [error, setError] = useState('');
-  const [active, setActive] = useState(false);
-  const [eligible, setEligible] = useState(false);
-  const background = useRef(null);
-  useEffect(() => {
-    const motion = window.matchMedia('(prefers-reduced-motion: reduce)');
-    const connection = navigator.connection;
-    let idle = null;
-    let inView = false;
-    let started = false;
-    const cancelIdle = () => {
-      if (idle === null) return;
-      if (window.cancelIdleCallback) window.cancelIdleCallback(idle);
-      else clearTimeout(idle);
-      idle = null;
-    };
-    const allowed = () => !motion.matches && Boolean(navigator.gpu) && !connection?.saveData;
-    const activate = () => {
-      if (!inView || document.hidden || !allowed()) { cancelIdle(); return; }
-      if (started || idle !== null) return;
-      const load = () => {
-        idle = null;
-        if (!inView || document.hidden || !allowed()) return;
-        started = true;
-        setActive(true);
-        observer.disconnect();
-      };
-      if (window.requestIdleCallback) idle = window.requestIdleCallback(load, { timeout: 800 });
-      else idle = setTimeout(load, 100);
-    };
-    const observer = new IntersectionObserver(([entry]) => {
-      inView = entry.isIntersecting && entry.intersectionRatio >= 0.02;
-      activate();
-    }, { threshold: [0, 0.02] });
-    const update = () => {
-      cancelIdle();
-      setEligible(allowed());
-      if (!allowed()) { started = false; setActive(false); observer.disconnect(); }
-      else if (!started && background.current) observer.observe(background.current);
-    };
-    update();
-    motion.addEventListener('change', update);
-    connection?.addEventListener?.('change', update);
-    document.addEventListener('visibilitychange', activate);
-    return () => { cancelIdle(); observer.disconnect(); motion.removeEventListener('change', update); connection?.removeEventListener?.('change', update); document.removeEventListener('visibilitychange', activate); };
-  }, []);
-  return <div ref={background} className="content-background" aria-hidden="true" data-error={error || undefined} data-renderer={error || !eligible ? 'fallback' : active ? 'webgpu' : 'pending'}>
-    <div className="content-background-viewport">
-      {error || !active ? <ShardFallback /> : <Suspense fallback={<ShardFallback />}><AeroShards
-        backgroundColor="#f8f0d6"
-        shardColor="#ebdda9"
-        accentColor="#cfb76f"
-        placement="full"
-        flow="stream"
-        material="pearl"
-        detail="balanced"
-        effect="none"
-        density={1.15}
-        shardSize={1.1}
-        speed={0.55}
-        spin={0.65}
-        interaction="repel"
-        bloom={0}
-        grain={0}
-        chromaticAberration={0}
-        onError={failure => setError(failure.message)}
-      /></Suspense>}
-    </div>
-  </div>;
-});
-
 const About = memo(function About() {
   return <section className="about section-space" id="about" aria-labelledby="about-title" data-motion-block>
+    <GalleryOrnament position="about" />
     <div className="container">
-      <SectionLabel number="01">ABOUT ME / 关于我</SectionLabel>
+      <SectionLabel number="02">ABOUT ME / 关于我</SectionLabel>
       <SectionMasthead words={['ABOUT', 'ME']} />
       <div className="about-grid">
         <div className="portrait-composition" data-motion-portrait>
           <div className="portrait-top"><span>THE PERSON BEHIND THE FRAME</span><span>杭州，中国</span></div>
-          <span className="portrait-letter" aria-hidden="true">S.</span>
+          <RosetteMark className="portrait-letter" />
           <figure className="portrait-photo"><img src={profile.portrait} srcSet={profile.portraitSrcSet} sizes="(max-width: 720px) 240px, 295px" alt={profile.portraitAlt} width="890" height="1234" loading="lazy" decoding="async" /><figcaption>SHENG YONGJIE<span>盛勇杰</span></figcaption></figure>
-          <div className="portrait-bottom"><span>保持好奇。持续创作。</span><span className="portrait-symbol" aria-hidden="true">✳</span></div>
+          <div className="portrait-bottom"><span>保持好奇。持续创作。</span><RosetteMark className="portrait-symbol" /></div>
         </div>
         <div className="about-copy" data-motion-copy>
           <p className="overline" data-copy-row>A LITTLE ABOUT ME</p>
@@ -197,11 +108,11 @@ const About = memo(function About() {
           <div className="about-meta" data-copy-row><div><span>所在地</span><p>{profile.location}</p></div><div><span>电子邮箱</span><a href={`mailto:${profile.email}`}>{profile.email}</a></div></div>
         </div>
       </div>
-      <div className="stats" aria-label="个人项目数据" data-motion-row><div><p>07<span>部</span></p><span>独立完成的 AI 短片</span></div><div><p>04<span>部</span></p><span>时长超过 1 分钟</span></div><div><p>03<span>部</span></p><span>时长约 30 秒</span></div><div className="stats-note"><span className="asterisk" aria-hidden="true">✳</span><p>从第一帧想象，<br />到最后一秒表达。</p></div></div>
+      <div className="stats" aria-label="个人项目数据" data-motion-row><div><p>07<span>部</span></p><span>独立完成的 AI 短片</span></div><div><p>04<span>部</span></p><span>时长超过 1 分钟</span></div><div><p>03<span>部</span></p><span>时长约 30 秒</span></div><div className="stats-note"><RosetteMark className="asterisk" /><p>从第一帧想象，<br />到最后一秒表达。</p></div></div>
       <div className="experience-block" data-motion-block data-columns="3" data-tablet-columns="3">
         <div className="experience-heading" id="experience"><h3>一路积累，一路创作。</h3><span>EXPERIENCE & EDUCATION</span></div>
         <SectionMasthead words={['MY', 'JOURNEY']} />
-        <div className="experience-list">{experiences.map((item, i) => <div className="experience-unit" key={item.role} data-motion-trigger data-motion-order={i}><PixelCard variant="yellow" colors="#edd38a,#d6b04c,#cfb76f" gap={6} speed={20} className="experience-card" ariaLabel={`${item.role}，${item.place}，${item.date}`}><article className="experience-item"><p className="experience-date"><span>0{i + 1}</span>{item.date}</p><h4>{item.role}</h4><p className="experience-place">{item.place}</p><p className="body-copy">{item.description}</p></article></PixelCard></div>)}</div>
+        <div className="experience-list">{experiences.map((item, i) => <div className="experience-unit" key={item.role} data-motion-trigger data-motion-order={i}><PixelCard variant="yellow" colors="#e9ddc6,#cabc9e,#b4a17b" gap={8} speed={15} className="experience-card" ariaLabel={`${item.role}，${item.place}，${item.date}`}><article className="experience-item"><p className="experience-date"><span>0{i + 1}</span>{item.date}</p><h4>{item.role}</h4><p className="experience-place">{item.place}</p><p className="body-copy">{item.description}</p></article></PixelCard></div>)}</div>
       </div>
     </div>
   </section>;
@@ -211,14 +122,14 @@ function ProjectCard({ project, index, onSelect }) {
   const isClip = project.kind === 'clip';
   return <div className={`project-unit project-${project.id}`} data-motion-trigger data-motion-order={index}>
     <button className="project-card" data-motion-card onClick={() => onSelect(project)} aria-label={`播放《${project.title}》，${project.category}`} aria-haspopup="dialog">
-      <div className="project-image" style={{ '--project-aspect': `${project.imageWidth} / ${project.imageHeight}` }}>
+      <div className="project-image">
         <div className="project-visual"><img src={project.image} alt={project.alt} loading="lazy" decoding="async" width={project.imageWidth} height={project.imageHeight} /></div>
         <div className="project-image-shade" />
         <div className="project-top"><span>{isClip ? 'CLIP' : 'FILM'} / {project.number}</span><span className="project-kind">{project.category}</span></div>
         <span className="cover-note">{project.durationLabel} / {isClip ? 'VISUAL CLIP' : 'FULL FILM'}</span>
         <span className="project-open"><Icon name="play" size={28} /><span>{isClip ? '播放片段' : '播放短片'}</span></span>
       </div>
-      <div className="project-caption"><div><p className="project-label">{project.label}</p><h3>{project.title}</h3></div><span className="project-english">{project.english}</span></div>
+      <div className="project-caption"><span className="project-index">{project.number}</span><span className="project-caption-line" aria-hidden="true" /><div className="project-title-group"><p className="project-label">{project.label}</p><h3>{project.title}</h3><span className="project-english">{project.english}</span></div><span className="project-arrow" aria-hidden="true">↗</span></div>
     </button>
   </div>;
 }
@@ -228,10 +139,10 @@ const Work = memo(function Work({ onSelect }) {
   const clips = projects.filter(project => project.kind === 'clip');
   const count = value => String(value).padStart(2, '0');
   return <section className="work section-space" id="work" aria-labelledby="work-title" data-motion-block data-columns="2" data-tablet-columns="2">
+    <GalleryOrnament position="work" />
     <div className="container">
-      <SectionLabel number="02">SELECTED WORK / 精选作品</SectionLabel>
-      <SectionMasthead words={['SELECTED', 'WORK']} />
-      <div className="section-heading" data-motion-copy><MaskedHeading id="work-title" lines={['把想法，', <span className="accent-word">放进画面里。</span>]} /><div className="section-side" data-copy-row><p className="serif-note">Ideas into images.</p><p>故事、人物与视觉风格。<br />这里记录我的影像创作与探索。</p></div></div>
+      <SectionLabel number="01">THE MOVING IMAGE / 影像档案</SectionLabel>
+      <div className="gallery-section-heading"><SectionMasthead words={['SELECTED', 'WORK']} /><h2 id="work-title">精选影像</h2><p className="gallery-section-note">AI × FILM × DESIGN<span>用 AI 连接想象与真实</span></p></div>
       <div className="project-grid" role="group" aria-label="完整短片">{films.map((project, i) => <ProjectCard key={project.id} project={project} index={i} onSelect={onSelect} />)}</div>
       {clips.length > 0 && <div className="project-collection">
         <div className="project-collection-heading" data-motion-copy><p id="clips-title" data-copy-row>VISUAL STUDIES <span>影像片段</span></p><p data-copy-row>风格、场景与镜头的持续探索。<span>{count(clips.length)} CLIPS</span></p></div>
@@ -253,11 +164,11 @@ const Approach = memo(function Approach() {
 });
 
 function Contact({ onCopy }) {
-  return <section className="contact" id="contact" aria-labelledby="contact-title" data-motion-block><div className="contact-inner container">
+  return <section className="contact" id="contact" aria-labelledby="contact-title" data-motion-block><GalleryOrnament position="contact" /><div className="contact-inner container">
     <SectionLabel number="04">LET'S CONNECT / 联系我</SectionLabel>
     <SectionMasthead words={['LET’S', 'CONNECT']} />
     <div className="contact-main" data-motion-copy><div className="contact-title-wrap"><p className="contact-pretitle" data-copy-row>好故事，始于一次交流。</p><MaskedHeading id="contact-title" lines={['下一个故事，', '一起创作。']} /><p className="contact-script" data-copy-row>Let’s make something <em>meaningful.</em></p></div><div className="contact-details" data-copy-row><p className="contact-invitation">关于 AI 影像、视觉创作，<br />或是一个还没成形的想法，<br />都欢迎和我聊聊。</p><div className="contact-email"><span>EMAIL</span><a href={`mailto:${profile.email}`}>{profile.email}</a><button className="copy-button" aria-label="复制电子邮箱" onClick={() => onCopy(profile.email)}><Icon name="copy" size={20} /></button></div><div className="contact-other"><div><span>PHONE</span><a href={`tel:${profile.phone}`}>{profile.phone}</a></div><div><span>BASED IN</span><p>{profile.location}，中国</p></div></div></div></div>
-    <div className="contact-footer"><a className="footer-brand" href="#home" aria-label="盛勇杰，回到首页">S.</a><p>© {new Date().getFullYear()} {profile.englishName}<span>保持好奇，持续创作。</span></p><a href="#home" className="back-to-top">回到顶部</a></div>
+    <div className="contact-footer"><a className="footer-brand" href="#home" aria-label="盛勇杰，回到首页"><RosetteMark /></a><p>© {new Date().getFullYear()} {profile.englishName}<span>保持好奇，持续创作。</span></p><a href="#home" className="back-to-top">回到顶部 ↑</a></div>
   </div></section>;
 }
 
@@ -320,5 +231,5 @@ export default function App() {
     clearTimeout(toastTimer.current);
     toastTimer.current = setTimeout(() => setToast(''), 4500);
   }
-  return <div className="portfolio-page" ref={page}><a className="skip-link" href="#about">跳到主要内容</a><Header active={active} /><main><Hero /><div className="light-sections"><ContentBackground /><About /><Work onSelect={setProject} /></div><Approach /><Contact onCopy={copyEmail} /></main><BackgroundMusic track={backgroundMusic} suspended={Boolean(project)} /><ProjectDialog project={project} onClose={() => setProject(null)} /><div className={`toast ${toast ? 'visible' : ''}`} role="status" aria-live="polite">{toast}</div></div>;
+  return <div className="portfolio-page" ref={page}><a className="skip-link" href="#work">跳到主要内容</a><Header active={active} /><main><Hero onSelect={setProject} /><div className="light-sections"><Work onSelect={setProject} /><About /></div><Approach /><Contact onCopy={copyEmail} /></main><BackgroundMusic track={backgroundMusic} suspended={Boolean(project)} /><ProjectDialog project={project} onClose={() => setProject(null)} /><div className={`toast ${toast ? 'visible' : ''}`} role="status" aria-live="polite">{toast}</div></div>;
 }

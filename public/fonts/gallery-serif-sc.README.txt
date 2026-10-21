@@ -1,0 +1,44 @@
+Gallery Serif SC Regular
+=======================
+
+Self-hosted Chinese serif font for the portfolio's names and display headings.
+This is a static weight-400 subset of the official Noto Serif SC font.
+The derivative family and PostScript names are Gallery Serif SC and
+GallerySerifSC-Regular. The source outline design is unchanged.
+
+File: gallery-serif-sc-regular.woff2
+Size: 92,572 bytes
+Coverage: 560 encoded characters, including 455 CJK characters; 594 glyphs.
+Content basis: Chinese text in src JS/JSX/TS/TSX plus the agreed gallery labels,
+ASCII U+0020-U+007E, and punctuation occurring in the site text.
+Verified against the current site source on 2026-10-21: no missing characters.
+
+Source: https://github.com/google/fonts/tree/main/ofl/notoserifsc
+Original filename: NotoSerifSC[wght].ttf
+Original SHA-256:
+050080d9255a86808f2945bffac582b31ef32bc36411ce29563b4961670c66f9
+Subset SHA-256:
+299a34cc24db117b9120075c6d9d7ee18664d5ad97cdc46a13d19bbdc7ccce69
+
+License: SIL Open Font License 1.1. See LICENSE-GallerySerifSC.txt for the
+upstream copyright notice, original license, and modification notice.
+
+Use through the 'Gallery Serif SC' @font-face declared in src/fonts.css.
+The font may be preloaded with as="font", type="font/woff2", and crossorigin.
+Use a local Songti/SimSun/serif fallback for newly added characters until the
+subset is regenerated. This file is deliberately not a complete CJK font.
+
+Hero-name display subset
+------------------------
+
+File: gallery-serif-sc-name-semibold.woff2
+Size: 2,204 bytes
+Coverage: only 盛勇杰 (U+76DB, U+52C7, U+6770), 4 glyphs including .notdef.
+Weight: static 600. Family: Gallery Serif SC; style: SemiBold.
+PostScript name: GallerySerifSC-NameSemiBold.
+SHA-256:
+951ef71c4252fbf105b530b10814178c48382acce2d4cbfdecd7b6c9ee686dcd
+
+Derived from the same official source and distributed under the same included
+SIL Open Font License 1.1. The @font-face unicode-range limits this face to the
+three name characters. The regular 400 font and its coverage are unchanged.

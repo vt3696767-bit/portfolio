@@ -40,9 +40,10 @@ function fixture(hash = '', scrollY = 0) {
     <header><div class="header-inner"><a class="brand" href="#home">S.</a><nav class="desktop-nav"><a href="#chapter">About</a></nav><a class="header-contact" href="#chapter">Contact</a></div></header>
     <section id="home" data-top="0" data-height="900">
       <div class="opening-curtain"><span class="opening-mark">S.</span><span class="opening-caption">SHENG YONGJIE</span></div>
-      <div class="hero-media"><img class="hero-poster" /></div>
-      <h1 class="hero-heading"><span class="heading-mask"><span class="heading-line">让想象，</span></span><span class="heading-mask"><span class="heading-line">成为画面。</span></span></h1>
-      <p class="hero-eyebrow">AI FILM</p><p class="hero-intro">Intro</p><a class="hero-cta">Work</a><div class="hero-bottom">Roles</div><span class="hero-period">✳</span>
+      <div class="hero-arch"><div class="hero-media"><img class="hero-poster" /></div></div>
+      <div class="hero-identity"><div class="hero-name-mask"><h1 class="hero-name">盛勇杰</h1></div><p class="hero-english">SHENG YONGJIE</p><p class="hero-roles">AI DESIGNER</p></div>
+      <p class="hero-heading"><span class="heading-mask"><span class="heading-line">让想象，</span></span><span class="heading-mask"><span class="heading-line">成为画面。</span></span></p>
+      <p class="hero-eyebrow">AI FILM</p><span class="hero-rule"></span><p class="hero-intro">Intro</p><a class="hero-cta">Work</a><p class="hero-art-caption">Western fantasy</p><button class="hero-art-play">Play</button><div class="hero-bottom">Explore</div>
     </section>
     <section id="chapter" data-motion-block data-columns="3" data-top="2400" data-height="1400">
       <div class="section-masthead" data-top="2500"><span class="masthead-mask"><span class="masthead-word">MY</span></span><span class="masthead-mask"><span class="masthead-word">JOURNEY</span></span></div>
@@ -66,16 +67,27 @@ function fixture(hash = '', scrollY = 0) {
   return root;
 }
 
-test('opening is a multi-stage sequence and keyboard focus exposes content immediately', t => {
+test('opening reveals the arch and layered identity, and keyboard focus exposes content immediately', t => {
   reduced = false;
   const root = fixture();
   const motion = createPortfolioMotion(root);
   t.after(() => motion.destroy());
   assert.ok(motion.opening.duration() >= 3.4);
+  assert.ok(motion.opening.duration() <= 4.5);
   assert.equal(root.querySelector('.opening-curtain').style.display, 'grid');
+  const animatedTargets = new Set(motion.opening.getChildren().flatMap(tween => tween.targets?.() || []));
+  for (const selector of ['.hero-name', '.hero-english', '.hero-arch', '.hero-poster', '.hero-art-play']) {
+    assert.ok(animatedTargets.has(root.querySelector(selector)), `${selector} participates in the opening`);
+  }
   root.querySelector('.brand').dispatchEvent(new browser.FocusEvent('focusin', { bubbles: true }));
   assert.equal(motion.opening.progress(), 1);
   assert.equal(browser.getComputedStyle(root.querySelector('.opening-curtain')).display, 'none');
+  for (const selector of ['.hero-name', '.hero-english', '.hero-arch', '.hero-poster', '.hero-art-play']) {
+    const element = root.querySelector(selector);
+    assert.equal(element.style.transform, '');
+    assert.equal(element.style.clipPath, '');
+    assert.equal(element.style.willChange, '');
+  }
   motion.destroy();
   assert.equal(ScrollTrigger.getAll().length, 0);
 });

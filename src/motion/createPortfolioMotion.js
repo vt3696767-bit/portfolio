@@ -89,11 +89,11 @@ export function createPortfolioMotion(root, openingPlayed = { current: false }) 
       const words = [...masthead.querySelectorAll('.masthead-word')];
       const heading = prepareScene(masthead, block, words, timeline => {
         timeline.fromTo(words, {
-          yPercent: 145, xPercent: -12, scaleX: .64, scaleY: .72, skewY: 7,
+          yPercent: 138, xPercent: -6, scaleX: .82, scaleY: .76, skewY: 3.5,
           transformOrigin: '0% 100%',
         }, {
           yPercent: 0, xPercent: 0, scaleX: 1, scaleY: 1, skewY: 0,
-          duration: desktop ? 1.85 : 1.55, stagger: .17,
+          duration: desktop ? 1.9 : 1.55, stagger: .15,
         });
       }, 0, true);
       headingScenes.set(block, heading);
@@ -105,7 +105,7 @@ export function createPortfolioMotion(root, openingPlayed = { current: false }) 
       const rows = [...trigger.querySelectorAll('[data-copy-row]')];
       prepareScene(trigger, block, [...lines, ...rows], timeline => {
         if (lines.length) timeline.fromTo(lines, {
-          yPercent: 125, scaleY: .7, skewY: 5, transformOrigin: '0% 100%',
+          yPercent: 125, scaleY: .78, skewY: 3, transformOrigin: '0% 100%',
         }, { yPercent: 0, scaleY: 1, skewY: 0, stagger: .13 }, 0);
         if (rows.length) timeline.fromTo(rows, {
           y: desktop ? 60 : 35, clipPath: CLOSED_CLIP,
@@ -118,8 +118,8 @@ export function createPortfolioMotion(root, openingPlayed = { current: false }) 
       if (!photo) return;
       prepareScene(trigger, trigger.closest('[data-motion-block]'), [photo], timeline => {
         timeline.fromTo(photo, {
-          y: 95, rotation: -9, scale: 1.09, clipPath: 'inset(0% 100% 0% 0%)',
-        }, { y: 0, rotation: -3, scale: 1, clipPath: OPEN_CLIP, duration: 1.8, ease: 'portfolio-wipe' });
+          y: 75, scale: 1.04, clipPath: 'inset(0% 100% 0% 0%)',
+        }, { y: 0, scale: 1, clipPath: OPEN_CLIP, duration: 1.8, ease: 'portfolio-wipe' });
       });
     });
 
@@ -136,11 +136,11 @@ export function createPortfolioMotion(root, openingPlayed = { current: false }) 
       const targets = [card, image, caption].filter(Boolean);
       prepareScene(trigger, block, targets, timeline => {
         timeline.fromTo(card, {
-          y: desktop ? 125 : 65, x: desktop ? (order % 2 ? 22 : -22) : 0,
-          scale: .91, rotation: desktop ? (order % 2 ? 1.4 : -1.4) : 0,
+          y: desktop ? 105 : 60,
+          scale: .965,
           clipPath: image ? OPEN_CLIP : CLOSED_CLIP,
           transformOrigin: '50% 100%',
-        }, { y: 0, x: 0, scale: 1, rotation: 0, clipPath: OPEN_CLIP, duration: 1.7 }, 0);
+        }, { y: 0, scale: 1, clipPath: OPEN_CLIP, duration: 1.75 }, 0);
         if (image) timeline.fromTo(image, { clipPath: CLOSED_CLIP }, {
           clipPath: OPEN_CLIP, duration: 1.55, ease: 'portfolio-wipe',
         }, .1);
@@ -173,8 +173,8 @@ export function createPortfolioMotion(root, openingPlayed = { current: false }) 
           },
         });
       };
-      select('.project-visual').forEach(target => parallax(target, target.closest('.project-unit'), 3.2));
-      parallax(root.querySelector('.hero-media'), root.querySelector('#home'), 3);
+      select('.project-visual').forEach(target => parallax(target, target.closest('.project-unit'), 2.6));
+      parallax(root.querySelector('.hero-media'), root.querySelector('#home'), 2);
     }
 
     const curtain = root.querySelector('.opening-curtain');
@@ -183,10 +183,13 @@ export function createPortfolioMotion(root, openingPlayed = { current: false }) 
       && (!window.location.hash || window.location.hash === '#home') && !openingPlayed.current;
     if (playOpening) {
       const words = [...hero.querySelectorAll('.hero-heading .heading-line')];
-      const header = select('.header-inner .brand, .desktop-nav a, .header-contact');
-      const details = select('.hero-eyebrow, .hero-intro, .hero-cta, .hero-bottom, .hero-period');
+      const names = [...hero.querySelectorAll('.hero-name')];
+      const english = [...hero.querySelectorAll('.hero-english')];
+      const header = select('.header-inner .brand, .desktop-nav a, .header-contact, .menu-toggle');
+      const details = [...hero.querySelectorAll('.hero-eyebrow, .hero-roles, .hero-rule, .hero-intro, .hero-cta, .hero-art-caption, .hero-art-play, .hero-bottom')];
       const poster = hero.querySelector('.hero-poster');
-      const targets = [...words, ...header, ...details, poster, curtain].filter(Boolean);
+      const arch = hero.querySelector('.hero-arch');
+      const targets = [...names, ...english, ...words, ...header, ...details, poster, arch, curtain].filter(Boolean);
       gsap.set(curtain, { display: 'grid', yPercent: 0 });
       opening = gsap.timeline({
         defaults: { ease: 'portfolio-settle' },
@@ -197,17 +200,26 @@ export function createPortfolioMotion(root, openingPlayed = { current: false }) 
           window.removeEventListener('scroll', onOpeningScroll);
         },
       });
-      opening.fromTo('.opening-mark', { yPercent: 125, scaleY: .65 }, { yPercent: 0, scaleY: 1, duration: 1.05 }, 0)
-        .fromTo('.opening-caption', { yPercent: 130 }, { yPercent: 0, duration: .95 }, .16)
-        .to(curtain, { yPercent: -102, duration: 1.3, ease: 'portfolio-wipe' }, .85)
-        .fromTo(poster, { scale: 1.16 }, { scale: 1, duration: 2.35 }, .95)
+      opening.fromTo(hero.querySelectorAll('.opening-mark'), { yPercent: 125, scaleY: .7 }, { yPercent: 0, scaleY: 1, duration: 1.05 }, 0)
+        .fromTo(hero.querySelectorAll('.opening-caption'), { yPercent: 130 }, { yPercent: 0, duration: .95 }, .16)
+        .to(curtain, { yPercent: -102, duration: 1.35, ease: 'portfolio-wipe' }, .85);
+      if (arch) opening.fromTo(arch, { clipPath: 'inset(100% 0% 0% 0%)' }, {
+        clipPath: OPEN_CLIP, duration: 2.1, ease: 'portfolio-wipe',
+      }, 1.05);
+      if (poster) opening.fromTo(poster, { scale: 1.1 }, { scale: 1, duration: 2.75 }, .95);
+      opening.fromTo(names, {
+        yPercent: 125, xPercent: -3, scaleX: .92, scaleY: .7, transformOrigin: '0% 100%',
+      }, { yPercent: 0, xPercent: 0, scaleX: 1, scaleY: 1, duration: 1.9 }, 1.55)
+        .fromTo(english, {
+          yPercent: 80, xPercent: -10, scaleX: .88, clipPath: CLOSED_CLIP, transformOrigin: '0% 50%',
+        }, { yPercent: 0, xPercent: 0, scaleX: 1, clipPath: OPEN_CLIP, duration: 1.85 }, 1.8)
         .fromTo(words, {
-          yPercent: 138, xPercent: -8, scaleX: .72, scaleY: .55, skewY: 8, transformOrigin: '0% 100%',
+          yPercent: 138, xPercent: -4, scaleX: .86, scaleY: .7, skewY: 3, transformOrigin: '0% 100%',
         }, {
-          yPercent: 0, xPercent: 0, scaleX: 1, scaleY: 1, skewY: 0, duration: 1.95, stagger: .18,
-        }, 1.85)
-        .fromTo(header, { y: -50, clipPath: CLOSED_CLIP }, { y: 0, clipPath: OPEN_CLIP, duration: 1.3, stagger: .07 }, 1.98)
-        .fromTo(details, { y: 48, clipPath: CLOSED_CLIP }, { y: 0, clipPath: OPEN_CLIP, duration: 1.25, stagger: .11 }, 2.35)
+          yPercent: 0, xPercent: 0, scaleX: 1, scaleY: 1, skewY: 0, duration: 1.65, stagger: .16,
+        }, 2.05)
+        .fromTo(header, { y: -36, clipPath: CLOSED_CLIP }, { y: 0, clipPath: OPEN_CLIP, duration: 1.2, stagger: .06 }, 1.8)
+        .fromTo(details, { y: 38, clipPath: CLOSED_CLIP }, { y: 0, clipPath: OPEN_CLIP, duration: 1.25, stagger: .075 }, 2.3)
         .set(targets.filter(target => target !== curtain), { clearProps: CLEAR_ENTRY })
         .set(curtain, { clearProps: 'all' });
     } else {

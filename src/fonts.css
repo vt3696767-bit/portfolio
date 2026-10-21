@@ -19,3 +19,22 @@
   font-display: swap;
   src: url('/fonts/cormorant-latin-italic.woff2') format('woff2');
 }
+
+/* Self-hosted site-text subset, derived from Noto Serif SC under SIL OFL 1.1. */
+@font-face {
+  font-family: 'Gallery Serif SC';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/fonts/gallery-serif-sc-regular.woff2') format('woff2');
+}
+
+/* Only the three hero-name glyphs need the heavier display weight. */
+@font-face {
+  font-family: 'Gallery Serif SC';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url('/fonts/gallery-serif-sc-name-semibold.woff2') format('woff2');
+  unicode-range: U+52C7, U+6770, U+76DB;
+}

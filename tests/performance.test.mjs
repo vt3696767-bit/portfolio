@@ -2,21 +2,12 @@ import assert from 'node:assert/strict';
 import { test, after } from 'node:test';
 import { readFileSync } from 'node:fs';
 import { Window } from 'happy-dom';
-import { FRAME_STATES, resolveRenderDpr, resolveCanvasSize } from '../src/components/AeroShards/renderBudget.js';
 import { backgroundMusic, profile, projects } from '../src/content.js';
 
-test('background stays within its pixel budget on standard, retina and 4K displays', () => {
-  const preset = { dpr: 2, supersamplePixels: 6_000_000 };
-  for (const [width, height, deviceDpr] of [[1920, 1080, 1], [1920, 1080, 2], [3840, 2160, 2], [7680, 4320, 3], [500, 700, 3]]) {
-    const dpr = resolveRenderDpr(preset, width, height, deviceDpr);
-    const [x, y] = resolveCanvasSize(width, height, dpr);
-    assert.ok(x * y <= 2_500_000);
-    assert.ok(dpr <= Math.min(deviceDpr, 1.25));
-    assert.ok(x > 0 && y > 0);
-  }
-  assert.equal(FRAME_STATES.ambient.continuous, false);
-  assert.equal(FRAME_STATES.ambient.interval, 1000 / 30);
-  assert.equal(FRAME_STATES.interactive.interval, 1000 / 60);
+test('the gallery entry point does not import a GPU background', () => {
+  const source = readFileSync(new URL('../src/App.jsx', import.meta.url), 'utf8');
+  assert.doesNotMatch(source, /from ['"][^'"]*AeroShards|import\(['"][^'"]*AeroShards/);
+  assert.doesNotMatch(source, /<ContentBackground\b|<AeroShards\b/);
 });
 
 test('hero preload selects the same responsive image as the page', () => {
@@ -25,7 +16,7 @@ test('hero preload selects the same responsive image as the page', () => {
   assert.ok(preload);
   assert.ok(preload.includes(`href="${profile.heroPoster}"`));
   assert.ok(preload.includes(`imagesrcset="${profile.heroPosterSrcSet}"`));
-  assert.ok(preload.includes('imagesizes="100vw"'));
+  assert.ok(preload.includes(`imagesizes="${profile.heroPosterSizes}"`));
 });
 
 // These are DOM/lifecycle contracts, not browser frame-rate measurements.
@@ -138,6 +129,7 @@ test('navigation threshold is observed and the gallery has no videos before sele
     assert.match(card.querySelector('.project-top').textContent, project.kind === 'clip' ? /^CLIP \/ / : /^FILM \/ /);
   }
   assert.equal(browser.document.querySelectorAll('video').length, 0);
+  assert.deepEqual([...browser.document.querySelectorAll('main section[id]')].map(section => section.id), ['home', 'work', 'about', 'approach', 'contact']);
   const audio = browser.document.querySelector('.music-player audio');
   assert.equal(audio.getAttribute('src'), null);
   assert.equal(audio.preload, 'none');
@@ -147,9 +139,22 @@ test('navigation threshold is observed and the gallery has no videos before sele
   assert.ok(browser.document.querySelector('.site-header').classList.contains('is-scrolled'));
   await act(async () => emitVisibility(marker, true));
   assert.ok(!browser.document.querySelector('.site-header').classList.contains('is-scrolled'));
-  assert.equal(browser.document.querySelector('.content-background').dataset.renderer, 'fallback');
+  assert.equal(browser.document.querySelector('.content-background'), null);
+  assert.equal(browser.document.querySelector('.aero-shards'), null);
+  const ornaments = [...browser.document.querySelectorAll('.gallery-ornament')];
+  assert.ok(ornaments.length >= 2);
+  ornaments.forEach(ornament => {
+    assert.equal(ornament.tagName.toLowerCase(), 'svg');
+    assert.equal(ornament.getAttribute('aria-hidden'), 'true');
+    assert.equal(ornament.getAttribute('data-renderer'), 'static-svg');
+  });
   const hero = browser.document.querySelector('.hero-poster');
   assert.equal(hero.getAttribute('srcset'), profile.heroPosterSrcSet);
+  assert.equal(hero.getAttribute('sizes'), profile.heroPosterSizes);
+  assert.equal(hero.getAttribute('fetchpriority'), 'high');
+  assert.ok(browser.document.querySelector('.hero-arch').contains(hero));
+  assert.equal(browser.document.querySelector('h1').textContent, profile.name);
+  assert.equal(browser.document.querySelectorAll('h1').length, 1);
   await act(async () => browser.document.querySelector('.music-toggle').click());
   assert.equal(audio.getAttribute('src'), backgroundMusic.src);
   assert.equal(audio.volume, 0.3);
@@ -174,23 +179,39 @@ test('navigation threshold is observed and the gallery has no videos before sele
     assert.equal(browser.document.querySelector('.music-toggle').getAttribute('aria-pressed'), index === 0 ? 'true' : 'false');
     if (index === 0) await act(async () => browser.document.querySelector('.music-toggle').click());
   }
+  // The arch is a ninth route to the same existing film, not a second video download.
+  const featured = projects.find(project => project.id === 'western-fantasy');
+  await act(async () => browser.document.querySelector('.music-toggle').click());
+  mediaCalls.length = 0;
+  await act(async () => browser.document.querySelector('.hero-art-play').click());
+  const featuredVideo = browser.document.querySelector('video');
+  assert.equal(featuredVideo.getAttribute('src'), featured.video);
+  assert.ok(mediaCalls.indexOf('audio:pause') < mediaCalls.indexOf('video:play'));
+  assert.equal(browser.document.querySelector('.music-toggle').getAttribute('aria-pressed'), 'false');
+  await act(async () => browser.document.querySelector('.dialog-close').click());
+  assert.equal(featuredVideo.getAttribute('src'), null);
+  assert.equal(browser.document.querySelectorAll('video').length, 0);
+  assert.equal(browser.document.querySelector('.music-toggle').getAttribute('aria-pressed'), 'true');
 });
 
-test('a background touching the viewport edge does not initialize WebGPU', async t => {
+test('decorative backgrounds remain static even when WebGPU is supported and sections enter view', async t => {
   reduced = false;
-  Object.defineProperty(browser.navigator, 'gpu', { configurable: true, value: {} });
+  let gpuRequests = 0;
+  Object.defineProperty(browser.navigator, 'gpu', { configurable: true, value: { requestAdapter() { gpuRequests++; return Promise.resolve(null); } } });
   browser.document.body.innerHTML = '<div id="root"></div>';
   const { default: App } = await server.ssrLoadModule('/src/App.jsx');
   const root = createRoot(browser.document.getElementById('root'));
   t.after(async () => { await act(async () => root.unmount()); delete browser.navigator.gpu; });
   await act(async () => root.render(createElement(App)));
-  const background = browser.document.querySelector('.content-background');
+  const ornaments = [...browser.document.querySelectorAll('.gallery-ornament')];
+  assert.ok(ornaments.length >= 2);
   await act(async () => {
-    for (const observer of Observer.all) if (observer.targets.has(background)) observer.emit(background, true, 0);
+    for (const observer of Observer.all) for (const target of observer.targets) observer.emit(target, true, 1);
     await new Promise(resolve => setTimeout(resolve, 120));
   });
-  assert.equal(background.dataset.renderer, 'pending');
-  assert.equal(background.querySelector('.aero-shards'), null);
+  assert.equal(gpuRequests, 0);
+  assert.equal(browser.document.querySelector('.aero-shards'), null);
+  ornaments.forEach(ornament => assert.equal(ornament.querySelector('canvas, animate, animateTransform'), null));
 });
 
 after(async () => {
