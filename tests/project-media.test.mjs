@@ -27,13 +27,33 @@ function atoms(path) {
   return result;
 }
 
-test('all four requested films have original-frame posters and complete fast-start MP4 files', () => {
-  assert.deepEqual(projects.map(project => project.id), ['cat-cafe', 'lost-memory', 'combat-study', 'fashion-film']);
-  assert.deepEqual(projects.map(project => project.title), ['猫知道', '重新认识一下', '战斗练习 01', '时尚短片']);
+test('the original four films retain their titles, selected covers and video mappings', () => {
+  assert.deepEqual(projects.filter(project => project.kind !== 'clip').map(project => [project.id, project.title, project.image, project.video]), [
+    ['cat-cafe', '猫知道', '/images/projects/cat-cafe.webp', '/videos/projects/cat-cafe-web.mp4'],
+    ['lost-memory', '重新认识一下', '/images/projects/lost-memory-portrait.webp', '/videos/projects/lost-memory-web.mp4'],
+    ['combat-study', '战斗练习 01', '/images/projects/combat-study-duel.webp', '/videos/projects/combat-study-web.mp4'],
+    ['fashion-film', '时尚短片', '/images/projects/fashion-film-closeup.webp', '/videos/projects/fashion-film-web.mp4'],
+  ]);
+  assert.deepEqual(projects.filter(project => project.kind === 'clip').map(project => [project.id, project.title, project.number]), [
+    ['eastern-fantasy-live', '东方奇幻真人实拍', '05'],
+    ['song-dynasty', '古风·宋韵', '06'],
+    ['otherworld-fantasy', '异世界奇幻', '07'],
+    ['western-fantasy', '西式奇幻', '08'],
+  ]);
+});
+
+test('all eight works have original-frame posters and complete fast-start MP4 files within the Pages limit', () => {
+  assert.equal(projects.length, 8);
+  assert.equal(new Set(projects.map(project => project.video)).size, projects.length);
   for (const project of projects) {
     assert.ok(project.duration > 0);
     assert.match(project.durationLabel, /^\d{2}:\d{2}$/);
     assert.ok(!project.alt.includes('示意'));
+    assert.ok(project.imageWidth > 0 && project.imageHeight > 0);
+    if (project.kind === 'clip') {
+      assert.equal(project.image, `/images/projects/${project.id}.webp`);
+      assert.equal(project.video, `/videos/projects/${project.id}-web.mp4`);
+    }
     const poster = new URL(`../public${project.image}`, import.meta.url);
     const imageFile = openSync(poster, 'r');
     const imageHeader = Buffer.alloc(12);
@@ -43,6 +63,7 @@ test('all four requested films have original-frame posters and complete fast-sta
     const video = new URL(`../public${project.video}`, import.meta.url);
     const boxes = atoms(video);
     assert.ok(statSync(video).size > 1_000_000);
+    assert.ok(statSync(video).size <= 25 * 1024 * 1024, `${project.id} must fit Cloudflare Pages`);
     assert.equal(boxes[0].type, 'ftyp');
     const moov = boxes.find(box => box.type === 'moov');
     const mdat = boxes.find(box => box.type === 'mdat');

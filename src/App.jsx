@@ -207,25 +207,37 @@ const About = memo(function About() {
   </section>;
 });
 
+function ProjectCard({ project, index, onSelect }) {
+  const isClip = project.kind === 'clip';
+  return <div className={`project-unit project-${project.id}`} data-motion-trigger data-motion-order={index}>
+    <button className="project-card" data-motion-card onClick={() => onSelect(project)} aria-label={`播放《${project.title}》，${project.category}`} aria-haspopup="dialog">
+      <div className="project-image" style={{ '--project-aspect': `${project.imageWidth} / ${project.imageHeight}` }}>
+        <div className="project-visual"><img src={project.image} alt={project.alt} loading="lazy" decoding="async" width={project.imageWidth} height={project.imageHeight} /></div>
+        <div className="project-image-shade" />
+        <div className="project-top"><span>{isClip ? 'CLIP' : 'FILM'} / {project.number}</span><span className="project-kind">{project.category}</span></div>
+        <span className="cover-note">{project.durationLabel} / {isClip ? 'VISUAL CLIP' : 'FULL FILM'}</span>
+        <span className="project-open"><Icon name="play" size={28} /><span>{isClip ? '播放片段' : '播放短片'}</span></span>
+      </div>
+      <div className="project-caption"><div><p className="project-label">{project.label}</p><h3>{project.title}</h3></div><span className="project-english">{project.english}</span></div>
+    </button>
+  </div>;
+}
+
 const Work = memo(function Work({ onSelect }) {
+  const films = projects.filter(project => project.kind !== 'clip');
+  const clips = projects.filter(project => project.kind === 'clip');
+  const count = value => String(value).padStart(2, '0');
   return <section className="work section-space" id="work" aria-labelledby="work-title" data-motion-block data-columns="2" data-tablet-columns="2">
     <div className="container">
       <SectionLabel number="02">SELECTED WORK / 精选作品</SectionLabel>
       <SectionMasthead words={['SELECTED', 'WORK']} />
       <div className="section-heading" data-motion-copy><MaskedHeading id="work-title" lines={['把想法，', <span className="accent-word">放进画面里。</span>]} /><div className="section-side" data-copy-row><p className="serif-note">Ideas into images.</p><p>故事、人物与视觉风格。<br />这里记录我的影像创作与探索。</p></div></div>
-      <div className="project-grid">{projects.map((project, i) => <div key={project.id} className={`project-unit project-${project.id}`} data-motion-trigger data-motion-order={i}>
-        <button className="project-card" data-motion-card onClick={() => onSelect(project)} aria-label={`播放《${project.title}》，${project.category}`} aria-haspopup="dialog">
-          <div className="project-image" style={{ '--project-aspect': `${project.imageWidth} / ${project.imageHeight}` }}>
-            <div className="project-visual"><img src={project.image} alt={project.alt} loading="lazy" decoding="async" width={project.imageWidth} height={project.imageHeight} /></div>
-            <div className="project-image-shade" />
-            <div className="project-top"><span>FILM / {project.number}</span><span className="project-kind">{project.category}</span></div>
-            <span className="cover-note">{project.durationLabel} / FULL FILM</span>
-            <span className="project-open"><Icon name="play" size={28} /><span>播放短片</span></span>
-          </div>
-          <div className="project-caption"><div><p className="project-label">{project.label}</p><h3>{project.title}</h3></div><span className="project-english">{project.english}</span></div>
-        </button>
-      </div>)}</div>
-      <p className="work-footnote"><span className="footnote-line" />持续创作，持续更新。<span>04 SELECTED FILMS / 点击封面，观看完整短片。</span></p>
+      <div className="project-grid" role="group" aria-label="完整短片">{films.map((project, i) => <ProjectCard key={project.id} project={project} index={i} onSelect={onSelect} />)}</div>
+      {clips.length > 0 && <div className="project-collection">
+        <div className="project-collection-heading" data-motion-copy><p id="clips-title" data-copy-row>VISUAL STUDIES <span>影像片段</span></p><p data-copy-row>风格、场景与镜头的持续探索。<span>{count(clips.length)} CLIPS</span></p></div>
+        <div className="project-grid" role="group" aria-labelledby="clips-title">{clips.map((project, i) => <ProjectCard key={project.id} project={project} index={i} onSelect={onSelect} />)}</div>
+      </div>}
+      <p className="work-footnote"><span className="footnote-line" />持续创作，持续更新。<span>{count(projects.length)} SELECTED WORKS / {count(films.length)} FILMS{clips.length > 0 ? ` + ${count(clips.length)} CLIPS` : ''} · 点击封面，观看作品。</span></p>
     </div>
   </section>;
 });
@@ -266,11 +278,11 @@ function ProjectDialog({ project, onClose }) {
   }}>{project && <>
     <button className="dialog-close" aria-label="关闭视频" onClick={() => dialog.current.close()}><Icon name="close" /></button>
     <div className="dialog-player" style={{ '--video-aspect': `${project.imageWidth} / ${project.imageHeight}` }}>
-      <video ref={video} key={project.id} src={project.video} poster={project.image} controls autoPlay playsInline preload="metadata" aria-label={`《${project.title}》完整短片`} onCanPlay={() => setFailedSource('')} onError={() => setFailedSource(project.video)} />
+      <video ref={video} key={project.id} src={project.video} poster={project.image} controls autoPlay playsInline preload="metadata" aria-label={`《${project.title}》${project.kind === 'clip' ? '影像片段' : '完整短片'}`} onCanPlay={() => setFailedSource('')} onError={() => setFailedSource(project.video)} />
       {failedSource === project.video && <p className="video-error" role="status">视频暂时无法播放，<a href={project.video} target="_blank" rel="noopener noreferrer">单独打开视频</a>。</p>}
     </div>
     <div className="dialog-content">
-      <div className="dialog-film-meta"><p className="overline">FILM {project.number} / {project.category}</p><span>{project.durationLabel}</span><a href={project.video} target="_blank" rel="noopener noreferrer">单独观看 ↗</a></div>
+      <div className="dialog-film-meta"><p className="overline">{project.kind === 'clip' ? 'CLIP' : 'FILM'} {project.number} / {project.category}</p><span>{project.durationLabel}</span><a href={project.video} target="_blank" rel="noopener noreferrer">单独观看 ↗</a></div>
       <h2 id="dialog-title">{project.title}</h2><p className="dialog-summary">{project.summary}</p><p className="dialog-role">{project.responsibility}</p>
       <div className="dialog-notes">{project.notes.map((note, i) => <p key={note}><span>0{i + 1}</span>{note}</p>)}</div>
     </div>

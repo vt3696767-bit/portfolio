@@ -156,7 +156,13 @@ h1, h2, h3, h4, p, figure { margin: 0; }
 .section-side > p:last-child { font-size: .875rem; line-height: 1.9; color: var(--muted); }
 .project-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 38px; row-gap: 62px; }
 .project-card { border: 0; background: none; padding: 0; text-align: left; width: 100%; }
-.project-lost-memory, .project-fashion-film { margin-top: 120px; }
+.project-grid > .project-unit:nth-child(even) { margin-top: 120px; }
+.project-collection { margin-top: clamp(70px, 7vw, 120px); }
+.project-collection-heading { display: flex; align-items: flex-end; justify-content: space-between; gap: 28px; border-top: 1px solid var(--line); padding-top: 25px; margin-bottom: 40px; }
+.project-collection-heading > p:first-child { font-size: clamp(1.25rem, 1.65vw, 1.75rem); letter-spacing: -.035em; }
+.project-collection-heading > p:first-child > span { font-size: .875rem; margin-left: 18px; letter-spacing: 0; color: var(--muted); }
+.project-collection-heading > p:last-child { font-size: .75rem; color: var(--muted); text-align: right; line-height: 1.8; }
+.project-collection-heading > p:last-child > span { display: block; letter-spacing: .12em; margin-top: 7px; }
 .project-image { position: relative; aspect-ratio: var(--project-aspect, 16 / 9); overflow: hidden; background: #89723d; color: #faf0d2; }
 .project-image img { height: 100%; width: 100%; object-fit: cover; transition: transform .9s cubic-bezier(.2,.65,.3,1); }
 .project-image-shade { position: absolute; inset: 0; background: linear-gradient(180deg, rgb(26 25 22 / 28%), transparent 35%, rgb(26 25 22 / 24%)); }
@@ -291,7 +297,7 @@ h1, h2, h3, h4, p, figure { margin: 0; }
   .experience-item { padding: 25px 20px; }
   .section-heading h2 { font-size: 2.8rem; }
   .project-grid { column-gap: 26px; }
-  .project-lost-memory, .project-fashion-film { margin-top: 85px; }
+  .project-grid > .project-unit:nth-child(even) { margin-top: 85px; }
   .project-top { inset: 17px 16px auto; }
   .cover-note { left: 17px; bottom: 18px; }
   .project-open { right: 17px; bottom: 18px; }
@@ -369,7 +375,10 @@ h1, h2, h3, h4, p, figure { margin: 0; }
   .serif-note { font-size: 2.2rem; margin-bottom: 7px; }
   .section-side > p:last-child { font-size: .8125rem; }
   .project-grid { grid-template-columns: 1fr; row-gap: 36px; }
-  .project-lost-memory, .project-fashion-film { margin-top: 0; }
+  .project-grid > .project-unit:nth-child(even) { margin-top: 0; }
+  .project-collection-heading { align-items: flex-start; flex-direction: column; gap: 14px; margin-bottom: 28px; }
+  .project-collection-heading > p:last-child { text-align: left; }
+  .project-collection-heading > p:last-child > span { display: inline; margin-left: 14px; }
   .project-caption { margin-top: 16px; }
   .project-caption h3 { margin-top: 6px; font-size: 1.4rem; }
   .work-footnote { margin-top: 32px; gap: 12px; }

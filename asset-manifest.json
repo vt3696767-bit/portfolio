@@ -230,6 +230,151 @@
         "peakBitrateKbps": 4500
       },
       "previousWebVersion": "assets/source/videos/projects/fashion-film.mp4"
+    },
+    {
+      "id": "eastern-fantasy-live",
+      "kind": "clip",
+      "title": "东方奇幻真人实拍",
+      "source": "F:\\Midjourney-win-v2.5.2免安装版本\\视频\\作品集\\2.5测试镜头\\东方奇幻真人实拍.mp4",
+      "sourceBytes": 2649865,
+      "sourceSha256": "1279bac19503b3b752bc8d8f2dfd45378087114e558cac7b755e7eb5178281de",
+      "sourceDurationSeconds": 30.04,
+      "projectAsset": "/videos/projects/eastern-fantasy-live-web.mp4",
+      "bytes": 2649605,
+      "durationSeconds": 30.04,
+      "width": 1470,
+      "height": 630,
+      "fps": 24.0,
+      "codec": "H.264 / AAC",
+      "fastStart": true,
+      "audio": "original AAC stream copied",
+      "webPlaybackVersion": true,
+      "sourceFileModified": false,
+      "poster": "/images/projects/eastern-fantasy-live.webp",
+      "posterSize": [
+        1280,
+        548
+      ],
+      "posterBytes": 27388,
+      "posterTimestampSeconds": 12.02,
+      "posterSelection": "selected from user-provided original film",
+      "cloudflarePagesCompatible": true,
+      "completeDecodePassed": true,
+      "sha256": "8a4994322f9fe90d6b050677474d92911fad8dd62d6d94f278b88147bee386c6",
+      "encoding": {
+        "mode": "lossless remux"
+      }
+    },
+    {
+      "id": "song-dynasty",
+      "kind": "clip",
+      "title": "古风·宋韵",
+      "source": "F:\\Midjourney-win-v2.5.2免安装版本\\视频\\作品集\\2.5测试镜头\\古风-宋韵.mp4",
+      "sourceBytes": 30866673,
+      "sourceSha256": "6409268b7025ce72aff2aadf634210631257fe739746a1b2430b0cf766def5f1",
+      "sourceDurationSeconds": 25.06,
+      "projectAsset": "/videos/projects/song-dynasty-web.mp4",
+      "bytes": 7329424,
+      "durationSeconds": 25.09,
+      "width": 1470,
+      "height": 630,
+      "fps": 24.0,
+      "codec": "H.264 / AAC",
+      "fastStart": true,
+      "audio": "original AAC stream copied",
+      "webPlaybackVersion": true,
+      "sourceFileModified": false,
+      "poster": "/images/projects/song-dynasty.webp",
+      "posterSize": [
+        1280,
+        548
+      ],
+      "posterBytes": 24034,
+      "posterTimestampSeconds": 10.02,
+      "posterSelection": "selected from user-provided original film",
+      "cloudflarePagesCompatible": true,
+      "completeDecodePassed": true,
+      "sha256": "180b1514fe385b788bd0f3a0594d18b009f9e08f0bc328cb49e196a6cc7947e8",
+      "encoding": {
+        "mode": "CRF",
+        "crf": 22,
+        "preset": "medium",
+        "peakBitrateKbps": 4500
+      }
+    },
+    {
+      "id": "otherworld-fantasy",
+      "kind": "clip",
+      "title": "异世界奇幻",
+      "source": "F:\\Midjourney-win-v2.5.2免安装版本\\视频\\作品集\\2.5测试镜头\\异世界奇幻.mp4",
+      "sourceBytes": 28891525,
+      "sourceSha256": "702f77e1f2e3ec91a08c4dbb5a1e5a24caa9013870ae6383d2b04e4694b549af",
+      "sourceDurationSeconds": 16.79,
+      "projectAsset": "/videos/projects/otherworld-fantasy-web.mp4",
+      "bytes": 4357769,
+      "durationSeconds": 16.81,
+      "width": 1680,
+      "height": 720,
+      "fps": 60.0,
+      "codec": "H.264 / AAC",
+      "fastStart": true,
+      "audio": "original AAC stream copied",
+      "webPlaybackVersion": true,
+      "sourceFileModified": false,
+      "poster": "/images/projects/otherworld-fantasy.webp",
+      "posterSize": [
+        1280,
+        548
+      ],
+      "posterBytes": 37504,
+      "posterTimestampSeconds": 13.43,
+      "posterSelection": "selected from user-provided original film",
+      "cloudflarePagesCompatible": true,
+      "completeDecodePassed": true,
+      "sha256": "58c679da0b24e04236bfd59adcbf2f5a4021e14a4a66b7f031a519d4073d9d52",
+      "encoding": {
+        "mode": "CRF",
+        "crf": 22,
+        "preset": "medium",
+        "peakBitrateKbps": 4500
+      }
+    },
+    {
+      "id": "western-fantasy",
+      "kind": "clip",
+      "title": "西式奇幻",
+      "source": "F:\\Midjourney-win-v2.5.2免安装版本\\视频\\作品集\\2.5测试镜头\\西式奇幻.mp4",
+      "sourceBytes": 46264710,
+      "sourceSha256": "147e7020e01f49abddfb4d639213b2746c2674827b617f8549eecbde6fa70181",
+      "sourceDurationSeconds": 46.51,
+      "projectAsset": "/videos/projects/western-fantasy-web.mp4",
+      "bytes": 8452195,
+      "durationSeconds": 46.53,
+      "width": 1280,
+      "height": 720,
+      "fps": 30.0,
+      "codec": "H.264 / AAC",
+      "fastStart": true,
+      "audio": "original AAC stream copied",
+      "webPlaybackVersion": true,
+      "sourceFileModified": false,
+      "poster": "/images/projects/western-fantasy.webp",
+      "posterSize": [
+        1280,
+        720
+      ],
+      "posterBytes": 51948,
+      "posterTimestampSeconds": 37.21,
+      "posterSelection": "selected from user-provided original film",
+      "cloudflarePagesCompatible": true,
+      "completeDecodePassed": true,
+      "sha256": "0727b80c6cd44f9eec07c4ff46c4c42a97b0a3b8f04e9f49003370acfc5ef59b",
+      "encoding": {
+        "mode": "CRF",
+        "crf": 22,
+        "preset": "medium",
+        "peakBitrateKbps": 3500
+      }
     }
   ],
   "archivedAssets": [
@@ -337,5 +482,20 @@
     "correctedAsset": "/videos/projects/lost-memory-web.mp4",
     "beforeBytes": 40769902,
     "afterBytes": 24587005
+  },
+  "clipImport": {
+    "date": "2026-10-21",
+    "ids": [
+      "eastern-fantasy-live",
+      "song-dynasty",
+      "otherworld-fantasy",
+      "western-fantasy"
+    ],
+    "count": 4,
+    "bytes": 22788993,
+    "sourceFilesPreserved": true,
+    "framesPerSecondPreserved": true,
+    "completeDurationsPreserved": true,
+    "originalAudioStreamsCopied": true
   }
 }

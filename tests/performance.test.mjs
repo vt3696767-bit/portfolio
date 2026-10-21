@@ -121,7 +121,22 @@ test('navigation threshold is observed and the gallery has no videos before sele
   const root = createRoot(browser.document.getElementById('root'));
   t.after(async () => { await act(async () => root.unmount()); });
   await act(async () => root.render(createElement(App)));
-  assert.equal(browser.document.querySelectorAll('.project-card').length, 4);
+  assert.equal(browser.document.querySelectorAll('.project-card').length, 8);
+  assert.equal(browser.document.querySelectorAll('.project-grid').length, 2);
+  assert.equal(browser.document.querySelector('.project-grid[aria-label="完整短片"]').querySelectorAll('.project-card').length, 4);
+  assert.equal(browser.document.querySelector('.project-grid[aria-labelledby="clips-title"]').querySelectorAll('.project-card').length, 4);
+  assert.match(browser.document.querySelector('.work-footnote').textContent, /08 SELECTED WORKS \/ 04 FILMS \+ 04 CLIPS/);
+  assert.deepEqual([...browser.document.querySelectorAll('.stats > div > p')].slice(0, 3).map(element => element.firstChild.textContent), ['07', '04', '03']);
+  for (const [index, card] of [...browser.document.querySelectorAll('.project-card')].entries()) {
+    const project = projects[index];
+    const cover = card.querySelector('img');
+    assert.equal(cover.getAttribute('src'), project.image);
+    assert.equal(cover.getAttribute('loading'), 'lazy');
+    assert.equal(cover.getAttribute('width'), String(project.imageWidth));
+    assert.equal(cover.getAttribute('height'), String(project.imageHeight));
+    assert.match(card.querySelector('.cover-note').textContent, project.kind === 'clip' ? /VISUAL CLIP$/ : /FULL FILM$/);
+    assert.match(card.querySelector('.project-top').textContent, project.kind === 'clip' ? /^CLIP \/ / : /^FILM \/ /);
+  }
   assert.equal(browser.document.querySelectorAll('video').length, 0);
   const audio = browser.document.querySelector('.music-player audio');
   assert.equal(audio.getAttribute('src'), null);
@@ -148,6 +163,9 @@ test('navigation threshold is observed and the gallery has no videos before sele
     await act(async () => card.click());
     const video = browser.document.querySelector('video');
     assert.equal(video.getAttribute('src'), projects[index].video);
+    assert.equal(video.getAttribute('poster'), projects[index].image);
+    assert.equal(video.getAttribute('aria-label'), `《${projects[index].title}》${projects[index].kind === 'clip' ? '影像片段' : '完整短片'}`);
+    assert.match(browser.document.querySelector('.dialog-film-meta').textContent, projects[index].kind === 'clip' ? /^CLIP / : /^FILM /);
     assert.equal(browser.document.querySelector('.music-toggle').getAttribute('aria-pressed'), 'false');
     assert.ok(mediaCalls.indexOf('audio:pause') < mediaCalls.indexOf('video:play'));
     await act(async () => browser.document.querySelector('.dialog-close').click());
