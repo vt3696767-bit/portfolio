@@ -9,7 +9,7 @@
     "build": "vite build && node scripts/check-pages-assets.mjs",
     "preview": "vite preview --host 127.0.0.1 --port 4173 --strictPort",
     "test:motion": "node --test tests/motion.test.mjs",
-    "test:media": "node --test tests/project-media.test.mjs",
+    "test:media": "node --test tests/project-media.test.mjs tests/short-drama-range.test.mjs",
     "test:performance": "node --test tests/performance.test.mjs",
     "test:music": "node --test tests/background-music.test.mjs"
   },
