@@ -112,11 +112,11 @@ test('navigation threshold is observed and the gallery has no videos before sele
   const root = createRoot(browser.document.getElementById('root'));
   t.after(async () => { await act(async () => root.unmount()); });
   await act(async () => root.render(createElement(App)));
-  assert.equal(browser.document.querySelectorAll('.project-card').length, 8);
+  assert.equal(browser.document.querySelectorAll('.project-card').length, 9);
   assert.equal(browser.document.querySelectorAll('.project-grid').length, 2);
   assert.equal(browser.document.querySelector('.project-grid[aria-label="完整短片"]').querySelectorAll('.project-card').length, 4);
-  assert.equal(browser.document.querySelector('.project-grid[aria-labelledby="clips-title"]').querySelectorAll('.project-card').length, 4);
-  assert.match(browser.document.querySelector('.work-footnote').textContent, /08 SELECTED WORKS \/ 04 FILMS \+ 04 CLIPS/);
+  assert.equal(browser.document.querySelector('.project-grid[aria-labelledby="clips-title"]').querySelectorAll('.project-card').length, 5);
+  assert.match(browser.document.querySelector('.work-footnote').textContent, /09 SELECTED WORKS \/ 04 FILMS \+ 05 CLIPS/);
   assert.deepEqual([...browser.document.querySelectorAll('.stats > div > p')].slice(0, 3).map(element => element.firstChild.textContent), ['07', '04', '03']);
   for (const [index, card] of [...browser.document.querySelectorAll('.project-card')].entries()) {
     const project = projects[index];
@@ -169,6 +169,8 @@ test('navigation threshold is observed and the gallery has no videos before sele
     const video = browser.document.querySelector('video');
     assert.equal(video.getAttribute('src'), projects[index].video);
     assert.equal(video.getAttribute('poster'), projects[index].image);
+    assert.equal(browser.document.querySelector('.project-dialog').classList.contains('is-portrait'), projects[index].imageHeight > projects[index].imageWidth);
+    assert.equal(browser.document.querySelector('.dialog-player').style.getPropertyValue('--video-aspect'), `${projects[index].imageWidth} / ${projects[index].imageHeight}`);
     assert.equal(video.getAttribute('aria-label'), `《${projects[index].title}》${projects[index].kind === 'clip' ? '影像片段' : '完整短片'}`);
     assert.match(browser.document.querySelector('.dialog-film-meta').textContent, projects[index].kind === 'clip' ? /^CLIP / : /^FILM /);
     assert.equal(browser.document.querySelector('.music-toggle').getAttribute('aria-pressed'), 'false');
@@ -179,7 +181,7 @@ test('navigation threshold is observed and the gallery has no videos before sele
     assert.equal(browser.document.querySelector('.music-toggle').getAttribute('aria-pressed'), index === 0 ? 'true' : 'false');
     if (index === 0) await act(async () => browser.document.querySelector('.music-toggle').click());
   }
-  // The arch is a ninth route to the same existing film, not a second video download.
+  // The arch reuses the existing film instead of creating another media entry.
   const featured = projects.find(project => project.id === 'western-fantasy');
   await act(async () => browser.document.querySelector('.music-toggle').click());
   mediaCalls.length = 0;

@@ -120,9 +120,24 @@
     "height": 720,
     "mode": "static responsive still inside CSS arch; video loads on click only",
     "variants": [
-      { "path": "/images/hero-gallery-640.webp", "width": 640, "height": 360, "bytes": 20032 },
-      { "path": "/images/hero-gallery-960.webp", "width": 960, "height": 540, "bytes": 31644 },
-      { "path": "/images/hero-gallery-1280.webp", "width": 1280, "height": 720, "bytes": 46012 }
+      {
+        "path": "/images/hero-gallery-640.webp",
+        "width": 640,
+        "height": 360,
+        "bytes": 20032
+      },
+      {
+        "path": "/images/hero-gallery-960.webp",
+        "width": 960,
+        "height": 540,
+        "bytes": 31644
+      },
+      {
+        "path": "/images/hero-gallery-1280.webp",
+        "width": 1280,
+        "height": 720,
+        "bytes": 46012
+      }
     ],
     "designReference": "04B-西方古典画廊-镂空符号深化.png, approved by user on 2026-10-21",
     "ornaments": "native static SVG quatrefoil and S maker mark; no generated webpage bitmap used as background"
@@ -393,6 +408,50 @@
         "preset": "medium",
         "peakBitrateKbps": 3500
       }
+    },
+    {
+      "id": "short-drama-xingjuguanghe",
+      "kind": "clip",
+      "title": "星聚光和测试题",
+      "source": "F:\\Midjourney-win-v2.5.2免安装版本\\视频\\星聚光和测试题-盛勇杰.mp4",
+      "sourceBytes": 265779312,
+      "sourceSha256": "d9b542e005025ae02ac341fb2cf65aa50258acc14e5999d1cc89f4ed3a00cc1f",
+      "sourceDurationSeconds": 258.33,
+      "sourceSize": [
+        720,
+        1282
+      ],
+      "projectAsset": "/videos/projects/short-drama-xingjuguanghe-web.mp4",
+      "bytes": 24417294,
+      "width": 540,
+      "height": 962,
+      "durationSeconds": 258.35,
+      "fps": 29.97,
+      "codec": "H.264 / AAC",
+      "audio": "AAC 96kbps stereo, re-encoded from original audio",
+      "fastStart": true,
+      "webPlaybackVersion": true,
+      "sourceFileModified": false,
+      "completeDecodePassed": true,
+      "sha256": "57d646d4f7b03c4ee2505a5575a79830a3ab36d16bb7cc842d79971b14e0782c",
+      "poster": "/images/projects/short-drama-xingjuguanghe.webp",
+      "posterSize": [
+        540,
+        962
+      ],
+      "posterBytes": 35668,
+      "posterTimestampSeconds": 160,
+      "posterSelection": "original full-color frame; cover uses portrait-aware crop, player preserves original framing",
+      "cloudflarePagesCompatible": true,
+      "completeDurationPreserved": true,
+      "encoding": {
+        "mode": "two-pass average bitrate",
+        "videoBitrateKbps": 650,
+        "audioBitrateKbps": 96,
+        "peakVideoBitrateKbps": 1100,
+        "preset": "medium"
+      },
+      "importDate": "2026-10-31"
     }
   ],
   "archivedAssets": [

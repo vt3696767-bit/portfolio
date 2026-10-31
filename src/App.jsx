@@ -122,7 +122,7 @@ function ProjectCard({ project, index, onSelect }) {
   const isClip = project.kind === 'clip';
   return <div className={`project-unit project-${project.id}`} data-motion-trigger data-motion-order={index}>
     <button className="project-card" data-motion-card onClick={() => onSelect(project)} aria-label={`播放《${project.title}》，${project.category}`} aria-haspopup="dialog">
-      <div className="project-image">
+      <div className={`project-image ${project.imageHeight > project.imageWidth ? 'is-portrait' : ''}`}>
         <div className="project-visual"><img src={project.image} alt={project.alt} loading="lazy" decoding="async" width={project.imageWidth} height={project.imageHeight} /></div>
         <div className="project-image-shade" />
         <div className="project-top"><span>{isClip ? 'CLIP' : 'FILM'} / {project.number}</span><span className="project-kind">{project.category}</span></div>
@@ -182,7 +182,7 @@ function ProjectDialog({ project, onClose }) {
     }
     if (dialog.current?.open) dialog.current.close();
   }, [project]);
-  return <dialog className="project-dialog" ref={dialog} aria-labelledby="dialog-title" onClose={onClose} onClick={event => {
+  return <dialog className={`project-dialog ${project && project.imageHeight > project.imageWidth ? 'is-portrait' : ''}`} ref={dialog} aria-labelledby="dialog-title" onClose={onClose} onClick={event => {
     if (event.target !== dialog.current) return;
     const box = dialog.current.getBoundingClientRect();
     if (event.clientX < box.left || event.clientX > box.right || event.clientY < box.top || event.clientY > box.bottom) dialog.current.close();

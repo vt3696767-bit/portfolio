@@ -39,11 +39,12 @@ test('the original four films retain their titles, selected covers and video map
     ['song-dynasty', '古风·宋韵', '06'],
     ['otherworld-fantasy', '异世界奇幻', '07'],
     ['western-fantasy', '西式奇幻', '08'],
+    ['short-drama-xingjuguanghe', '星聚光和测试题', '09'],
   ]);
 });
 
-test('all eight works have original-frame posters and complete fast-start MP4 files within the Pages limit', () => {
-  assert.equal(projects.length, 8);
+test('all nine works have original-frame posters and complete fast-start MP4 files within the Pages limit', () => {
+  assert.equal(projects.length, 9);
   assert.equal(new Set(projects.map(project => project.video)).size, projects.length);
   for (const project of projects) {
     assert.ok(project.duration > 0);

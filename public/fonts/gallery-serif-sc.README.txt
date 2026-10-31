@@ -7,18 +7,18 @@ The derivative family and PostScript names are Gallery Serif SC and
 GallerySerifSC-Regular. The source outline design is unchanged.
 
 File: gallery-serif-sc-regular.woff2
-Size: 92,572 bytes
-Coverage: 560 encoded characters, including 455 CJK characters; 594 glyphs.
+Size: 94,044 bytes
+Coverage: 569 encoded characters, including 464 CJK characters; 603 glyphs.
 Content basis: Chinese text in src JS/JSX/TS/TSX plus the agreed gallery labels,
 ASCII U+0020-U+007E, and punctuation occurring in the site text.
-Verified against the current site source on 2026-10-21: no missing characters.
+Verified against the current site source on 2026-10-31: no missing characters.
 
 Source: https://github.com/google/fonts/tree/main/ofl/notoserifsc
 Original filename: NotoSerifSC[wght].ttf
 Original SHA-256:
 050080d9255a86808f2945bffac582b31ef32bc36411ce29563b4961670c66f9
 Subset SHA-256:
-299a34cc24db117b9120075c6d9d7ee18664d5ad97cdc46a13d19bbdc7ccce69
+7ebaa383e6498d2879fa3a0877c4a79f05d983b3e2dee40111c23fdb5719cdf9
 
 License: SIL Open Font License 1.1. See LICENSE-GallerySerifSC.txt for the
 upstream copyright notice, original license, and modification notice.

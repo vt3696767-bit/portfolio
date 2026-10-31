@@ -158,6 +158,7 @@ h1, h2, h3, h4, p, figure { margin: 0; }
 .project-collection-heading > p:last-child > span { display: block; font-family: var(--serif); letter-spacing: .12em; margin-top: 5px; }
 .project-image { position: relative; aspect-ratio: 16 / 9; overflow: hidden; background: var(--paper-deep); color: var(--paper); }
 .project-image img { height: 100%; width: 100%; object-fit: cover; transition: transform .9s cubic-bezier(.2,.65,.3,1); }
+.project-image.is-portrait img { object-position: 50% 20%; }
 .project-image-shade { position: absolute; inset: 0; background: linear-gradient(180deg, rgb(26 23 18 / 18%), transparent 30%, rgb(26 23 18 / 24%)); opacity: .6; transition: opacity .3s; }
 .project-card:is(:hover, :focus-visible) .project-image img { transform: scale(1.025); }
 .project-card:is(:hover, :focus-visible) .project-image-shade { opacity: 1; }
@@ -277,6 +278,7 @@ h1, h2, h3, h4, p, figure { margin: 0; }
 /* The film viewer keeps native playback controls and keyboard access. */
 .project-dialog { position: fixed; border: 1px solid var(--line); margin: auto; padding: 0; width: min(1200px, calc(100% - 64px)); max-height: 88svh; overflow-y: auto; background: var(--paper); color: var(--ink); overscroll-behavior: contain; }
 .project-dialog::backdrop { background: rgb(27 23 18 / 80%); backdrop-filter: blur(8px); }
+.project-dialog.is-portrait { width: min(760px, calc(100% - 64px)); }
 .dialog-close { position: sticky; top: 18px; float: right; margin: 18px 18px -62px 0; z-index: 2; height: 42px; width: 42px; border: 1px solid var(--primary-light); border-radius: 50%; display: grid; place-items: center; color: var(--paper); background: rgb(48 38 25 / 90%); transition: background .25s, color .25s; }
 .dialog-close:is(:hover, :focus-visible) { background: var(--paper); color: var(--ink); }
 .dialog-player { background: #171410; }
@@ -511,7 +513,7 @@ h1, h2, h3, h4, p, figure { margin: 0; }
   .footer-brand { font-size: 2.6rem; }
   .contact-footer > p { font-size: .66rem; }
   .back-to-top { font-size: .7rem; margin-right: 0; }
-  .project-dialog { width: calc(100% - 24px); max-height: 90svh; }
+  .project-dialog, .project-dialog.is-portrait { width: calc(100% - 24px); max-height: 90svh; }
   .dialog-player video { max-height: 55svh; }
   .dialog-content { padding: 27px 24px; }
   .dialog-content h2 { font-size: 1.75rem; }
