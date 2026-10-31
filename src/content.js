@@ -105,9 +105,10 @@ export const projects = [
     notes: ['西式古典服装与室内场景。', '冷色窗光与暖色烛火。', '人物动作与群像调度。'],
   },
   {
-    id: 'short-drama-xingjuguanghe', number: '09', kind: 'clip', title: '星聚光和测试题', english: 'Short Drama Excerpt',
+    id: 'short-drama-xingjuguanghe', number: '09', kind: 'clip', title: '短剧片段', english: 'Short Drama Excerpt',
     category: '竖屏短剧片段', label: '短剧片段 · 人物叙事',
-    image: '/images/projects/short-drama-xingjuguanghe.webp', alt: '《星聚光和测试题》原片画面：浅蓝色衣裙女性的人物镜头',
+    image: '/images/projects/short-drama-xingjuguanghe.webp', alt: '《短剧片段》原片画面：浅蓝色衣裙女性的情绪侧脸特写',
+    coverPosition: '50% 33.0673%',
     imageWidth: 540, imageHeight: 962,
     video: '/videos/projects/short-drama-xingjuguanghe-web.mp4', duration: 258.35, durationLabel: '04:18',
     summary: '以人物对话与剧情推进为主的竖屏短剧片段，保留完整片段与声音。',

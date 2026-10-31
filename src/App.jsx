@@ -123,7 +123,7 @@ function ProjectCard({ project, index, onSelect }) {
   return <div className={`project-unit project-${project.id}`} data-motion-trigger data-motion-order={index}>
     <button className="project-card" data-motion-card onClick={() => onSelect(project)} aria-label={`播放《${project.title}》，${project.category}`} aria-haspopup="dialog">
       <div className={`project-image ${project.imageHeight > project.imageWidth ? 'is-portrait' : ''}`}>
-        <div className="project-visual"><img src={project.image} alt={project.alt} loading="lazy" decoding="async" width={project.imageWidth} height={project.imageHeight} /></div>
+        <div className="project-visual"><img src={project.image} alt={project.alt} style={project.coverPosition ? { objectPosition: project.coverPosition } : undefined} loading="lazy" decoding="async" width={project.imageWidth} height={project.imageHeight} /></div>
         <div className="project-image-shade" />
         <div className="project-top"><span>{isClip ? 'CLIP' : 'FILM'} / {project.number}</span><span className="project-kind">{project.category}</span></div>
         <span className="cover-note">{project.durationLabel} / {isClip ? 'VISUAL CLIP' : 'FULL FILM'}</span>

@@ -39,7 +39,7 @@ test('the original four films retain their titles, selected covers and video map
     ['song-dynasty', '古风·宋韵', '06'],
     ['otherworld-fantasy', '异世界奇幻', '07'],
     ['western-fantasy', '西式奇幻', '08'],
-    ['short-drama-xingjuguanghe', '星聚光和测试题', '09'],
+    ['short-drama-xingjuguanghe', '短剧片段', '09'],
   ]);
 });
 

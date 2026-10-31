@@ -412,7 +412,7 @@
     {
       "id": "short-drama-xingjuguanghe",
       "kind": "clip",
-      "title": "星聚光和测试题",
+      "title": "短剧片段",
       "source": "F:\\Midjourney-win-v2.5.2免安装版本\\视频\\星聚光和测试题-盛勇杰.mp4",
       "sourceBytes": 265779312,
       "sourceSha256": "d9b542e005025ae02ac341fb2cf65aa50258acc14e5999d1cc89f4ed3a00cc1f",
@@ -439,9 +439,9 @@
         540,
         962
       ],
-      "posterBytes": 35668,
-      "posterTimestampSeconds": 160,
-      "posterSelection": "original full-color frame; cover uses portrait-aware crop, player preserves original framing",
+      "posterBytes": 26942,
+      "posterTimestampSeconds": 132,
+      "posterSelection": "user selected group 2 option C: emotional profile at 132s; original color",
       "cloudflarePagesCompatible": true,
       "completeDurationPreserved": true,
       "encoding": {
@@ -451,7 +451,8 @@
         "peakVideoBitrateKbps": 1100,
         "preset": "medium"
       },
-      "importDate": "2026-10-31"
+      "importDate": "2026-10-31",
+      "coverPosition": "50% 33.0673%"
     }
   ],
   "archivedAssets": [
