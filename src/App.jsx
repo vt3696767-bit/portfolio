@@ -1,6 +1,6 @@
 import { memo, useEffect, useRef, useState } from 'react';
 import { backgroundMusic, capabilities, experiences, profile, projects } from './content';
-import { GalleryDivider, GalleryOrnament, RosetteMark } from './components/GalleryOrnament';
+import { GalleryOrnament, RosetteMark } from './components/GalleryOrnament';
 import PixelCard from './components/PixelCard/PixelCard';
 import BackgroundMusic from './components/BackgroundMusic/BackgroundMusic';
 import usePortfolioMotion from './motion/usePortfolioMotion';
@@ -48,9 +48,9 @@ const Header = memo(function Header({ active }) {
   const links = [{ id: 'work', label: '精选作品' }, { id: 'about', label: '关于我' }, { id: 'approach', label: '创作能力' }];
   return <><span ref={scrollMarker} className="header-scroll-marker" aria-hidden="true" /><header className={`site-header ${scrolled ? 'is-scrolled' : ''} ${menuOpen ? 'menu-open' : ''}`}>
     <div className="header-inner container">
-      <a className="brand" href="#home" onClick={() => setMenuOpen(false)} aria-label="盛勇杰，回到首页"><span className="brand-text">盛勇杰<span>SHENG YONGJIE</span></span></a>
+      <a className="brand" href="#home" onClick={() => setMenuOpen(false)} aria-label="盛勇杰，回到首页"><span className="brand-text">{profile.name}</span></a>
       <nav className="desktop-nav" aria-label="主导航">{links.map(link => <a key={link.id} className={active === link.id ? 'active' : ''} href={`#${link.id}`} aria-current={active === link.id ? 'location' : undefined}>{link.label}</a>)}</nav>
-      <a className="header-contact" href="#contact" onClick={() => setMenuOpen(false)} aria-label="联系盛勇杰"><span>联系</span><RosetteMark /></a>
+      <a className="header-contact" href="#contact" onClick={() => setMenuOpen(false)} aria-label="联系盛勇杰"><span>联系</span></a>
       <button className="menu-toggle" aria-label={menuOpen ? '关闭导航' : '打开导航'} aria-expanded={menuOpen} aria-controls="mobile-nav" onClick={() => setMenuOpen(v => !v)}><Icon name={menuOpen ? 'close' : 'menu'} /></button>
     </div>
     {menuOpen && <nav id="mobile-nav" className="mobile-nav" aria-label="移动端导航">{[...links, { id: 'contact', label: '联系我' }].map(link => <a key={link.id} href={`#${link.id}`} onClick={() => setMenuOpen(false)}>{link.label}</a>)}</nav>}
@@ -60,29 +60,22 @@ const Header = memo(function Header({ active }) {
 function Hero({ onSelect }) {
   const heroProject = projects.find(project => project.id === 'western-fantasy');
   return <section className="hero" id="home" aria-labelledby="hero-title">
-    <GalleryOrnament position="hero" />
-    <div className="opening-curtain" aria-hidden="true"><div className="opening-identity"><span className="opening-mark-mask"><span className="opening-mark"><RosetteMark /></span></span><span className="opening-caption-mask"><span className="opening-caption">{profile.englishName}</span></span></div><div className="opening-meta container"><span>PORTFOLIO / {new Date().getFullYear()}</span><span>AI FILM & VISUAL CREATION</span></div></div>
+    <div className="hero-visual" aria-hidden="true">
+      <div className="hero-media"><img className="hero-poster" src={profile.heroPoster} srcSet={profile.heroPosterSrcSet} sizes={profile.heroPosterSizes} width="1600" height="900" alt="" fetchPriority="high" decoding="async" /></div>
+    </div>
+    <div className="opening-curtain" aria-hidden="true">
+      <div className="opening-identity"><span className="opening-mark-mask"><span className="opening-mark"><RosetteMark /></span></span><span className="opening-caption-mask"><span className="opening-caption">{profile.englishName}</span></span></div>
+    </div>
     <div className="hero-inner container">
       <div className="hero-copy">
-        <p className="hero-eyebrow">AI FILMMAKER<br />&amp; DESIGNER</p>
-        <div className="hero-identity">
-          <div className="hero-name-mask"><h1 className="hero-name" id="hero-title">{profile.name}</h1></div>
-          <p className="hero-english">{profile.englishName}</p>
-          <p className="hero-roles">{profile.roles.map(role => <span key={role}>{role}</span>)}</p>
+        <MaskedHeading as="h1" id="hero-title" className="hero-heading" lines={['让想象，', '成为画面。']} />
+        <p className="hero-roles">{profile.roles.map(role => <span key={role}>{role}</span>)}</p>
+        <div className="hero-actions">
+          <a href="#work" className="hero-cta">观看作品</a>
+          <button className="hero-art-play" onClick={() => onSelect(heroProject)} aria-label="播放《西式奇幻》影像片段" aria-haspopup="dialog"><Icon name="play" size={17} /><span>《{heroProject.title}》</span></button>
         </div>
-        <span className="hero-rule" aria-hidden="true" />
-        <MaskedHeading as="p" className="hero-heading" lines={['让想象，', '成为画面。']} />
-        <p className="hero-intro">在想象与现实之间，<br />探索影像的更多可能。</p>
-        <a href="#work" className="hero-cta">观看作品 <span aria-hidden="true">↗</span></a>
-      </div>
-      <div className="hero-art">
-        <span className="hero-side-mark" aria-hidden="true">✦</span>
-        <div className="hero-arch"><div className="hero-media"><img className="hero-poster" src={profile.heroPoster} srcSet={profile.heroPosterSrcSet} sizes={profile.heroPosterSizes} width="1280" height="720" alt="《西式奇幻》原片画面：窗光中手捧织物的女性" fetchPriority="high" decoding="async" /></div></div>
-        <div className="hero-art-caption"><span>FRAME NO. 08</span><span>西式奇幻 / {heroProject.durationLabel}</span></div>
-        <button className="hero-art-play" onClick={() => onSelect(heroProject)} aria-label="播放《西式奇幻》影像片段" aria-haspopup="dialog"><Icon name="play" size={18} /><span>观看原片</span></button>
       </div>
     </div>
-    <div className="hero-bottom container"><GalleryDivider /><a className="scroll-cue" href="#work">探索影像 <span aria-hidden="true">↓</span></a></div>
   </section>;
 }
 
@@ -96,7 +89,7 @@ const About = memo(function About() {
         <div className="portrait-composition" data-motion-portrait>
           <div className="portrait-top"><span>THE PERSON BEHIND THE FRAME</span><span>杭州，中国</span></div>
           <RosetteMark className="portrait-letter" />
-          <figure className="portrait-photo"><img src={profile.portrait} srcSet={profile.portraitSrcSet} sizes="(max-width: 720px) 240px, 295px" alt={profile.portraitAlt} width="890" height="1234" loading="lazy" decoding="async" /><figcaption>SHENG YONGJIE<span>盛勇杰</span></figcaption></figure>
+          <figure className="portrait-photo"><img src={profile.portrait} srcSet={profile.portraitSrcSet} sizes="(max-width: 580px) calc(100vw - 40px), (max-width: 720px) 540px, (max-width: 1500px) 38vw, 540px" alt={profile.portraitAlt} width="752" height="940" loading="lazy" decoding="async" /><figcaption>SHENG YONGJIE<span>盛勇杰</span></figcaption></figure>
           <div className="portrait-bottom"><span>保持好奇。持续创作。</span><RosetteMark className="portrait-symbol" /></div>
         </div>
         <div className="about-copy" data-motion-copy>
@@ -118,37 +111,45 @@ const About = memo(function About() {
   </section>;
 });
 
+const isPracticeWork = project => project.duration < 60;
+
 function ProjectCard({ project, index, onSelect }) {
-  const isClip = project.kind === 'clip';
   return <div className={`project-unit project-${project.id}`} data-motion-trigger data-motion-order={index}>
     <button className="project-card" data-motion-card onClick={() => onSelect(project)} aria-label={`播放《${project.title}》，${project.category}`} aria-haspopup="dialog">
       <div className={`project-image ${project.imageHeight > project.imageWidth ? 'is-portrait' : ''}`}>
         <div className="project-visual"><img src={project.image} alt={project.alt} style={project.coverPosition ? { objectPosition: project.coverPosition } : undefined} loading="lazy" decoding="async" width={project.imageWidth} height={project.imageHeight} /></div>
         <div className="project-image-shade" />
-        <div className="project-top"><span>{isClip ? 'CLIP' : 'FILM'} / {project.number}</span><span className="project-kind">{project.category}</span></div>
-        <span className="cover-note">{project.durationLabel} / {isClip ? 'VISUAL CLIP' : 'FULL FILM'}</span>
-        <span className="project-open"><Icon name="play" size={28} /><span>{isClip ? '播放片段' : '播放短片'}</span></span>
+        <div className="project-top"><span>{isPracticeWork(project) ? 'STUDY' : 'WORK'} / {project.number}</span><span className="project-kind">{project.category}</span></div>
+        <span className="cover-note">{project.durationLabel}</span>
+        <span className="project-open"><Icon name="play" size={28} /><span>播放作品</span></span>
       </div>
-      <div className="project-caption"><span className="project-index">{project.number}</span><span className="project-caption-line" aria-hidden="true" /><div className="project-title-group"><p className="project-label">{project.label}</p><h3>{project.title}</h3><span className="project-english">{project.english}</span></div><span className="project-arrow" aria-hidden="true">↗</span></div>
+      <div className="project-caption"><span className="project-index">{project.number}</span><span className="project-caption-line" aria-hidden="true" /><div className="project-title-group"><p className="project-label">{project.label}</p><h4>{project.title}</h4><span className="project-english">{project.english}</span></div><span className="project-arrow" aria-hidden="true">↗</span></div>
     </button>
   </div>;
 }
 
 const Work = memo(function Work({ onSelect }) {
-  const films = projects.filter(project => project.kind !== 'clip');
-  const clips = projects.filter(project => project.kind === 'clip');
-  const count = value => String(value).padStart(2, '0');
+  const collections = [
+    { id: 'complete-works', title: '完整作品', english: 'COMPLETE WORKS', duration: '1 分钟及以上', items: projects.filter(project => !isPracticeWork(project)) },
+    { id: 'practice-works', title: '练习作品', english: 'VISUAL STUDIES', duration: '不足 1 分钟', items: projects.filter(isPracticeWork) },
+  ];
   return <section className="work section-space" id="work" aria-labelledby="work-title" data-motion-block data-columns="2" data-tablet-columns="2">
     <GalleryOrnament position="work" />
     <div className="container">
-      <SectionLabel number="01">THE MOVING IMAGE / 影像档案</SectionLabel>
-      <div className="gallery-section-heading"><SectionMasthead words={['SELECTED', 'WORK']} /><h2 id="work-title">精选影像</h2><p className="gallery-section-note">AI × FILM × DESIGN<span>用 AI 连接想象与真实</span></p></div>
-      <div className="project-grid" role="group" aria-label="完整短片">{films.map((project, i) => <ProjectCard key={project.id} project={project} index={i} onSelect={onSelect} />)}</div>
-      {clips.length > 0 && <div className="project-collection">
-        <div className="project-collection-heading" data-motion-copy><p id="clips-title" data-copy-row>VISUAL STUDIES <span>影像片段</span></p><p data-copy-row>风格、场景与镜头的持续探索。<span>{count(clips.length)} CLIPS</span></p></div>
-        <div className="project-grid" role="group" aria-labelledby="clips-title">{clips.map((project, i) => <ProjectCard key={project.id} project={project} index={i} onSelect={onSelect} />)}</div>
-      </div>}
-      <p className="work-footnote"><span className="footnote-line" />持续创作，持续更新。<span>{count(projects.length)} SELECTED WORKS / {count(films.length)} FILMS{clips.length > 0 ? ` + ${count(clips.length)} CLIPS` : ''} · 点击封面，观看作品。</span></p>
+      <div className="gallery-section-heading"><h2 id="work-title" className="section-masthead"><span className="masthead-mask"><span className="masthead-word">精选作品</span></span></h2></div>
+      <nav className="project-collection-links" aria-label="作品分类">
+        {collections.map(collection => <a key={collection.id} href={`#${collection.id}`}>
+          <span>{collection.title}</span><span>{collection.items.length} 部</span>
+        </a>)}
+      </nav>
+      {collections.map(({ id, title, english, duration, items }) => <div className="project-collection" key={id} id={id} role="group" aria-labelledby={`${id}-title`} tabIndex={-1}>
+        <div className="project-collection-heading" data-motion-copy>
+          <h3 id={`${id}-title`} data-copy-row>{title}<span lang="en">{english}</span></h3>
+          <p data-copy-row>{duration}</p>
+        </div>
+        <div className="project-grid">{items.map((project, i) => <ProjectCard key={project.id} project={project} index={i} onSelect={onSelect} />)}</div>
+      </div>)}
+      <p className="work-footnote"><span className="footnote-line" />持续创作，持续更新。<span>{projects.length} SELECTED WORKS · 点击封面，观看作品。</span></p>
     </div>
   </section>;
 });
@@ -189,11 +190,11 @@ function ProjectDialog({ project, onClose }) {
   }}>{project && <>
     <button className="dialog-close" aria-label="关闭视频" onClick={() => dialog.current.close()}><Icon name="close" /></button>
     <div className="dialog-player" style={{ '--video-aspect': `${project.imageWidth} / ${project.imageHeight}` }}>
-      <video ref={video} key={project.id} src={project.video} poster={project.image} controls autoPlay playsInline preload="metadata" aria-label={`《${project.title}》${project.kind === 'clip' ? '影像片段' : '完整短片'}`} onCanPlay={() => setFailedSource('')} onError={() => setFailedSource(project.video)} />
+      <video ref={video} key={project.id} src={project.video} poster={project.image} controls autoPlay playsInline preload="metadata" aria-label={`《${project.title}》视频`} onCanPlay={() => setFailedSource('')} onError={() => setFailedSource(project.video)} />
       {failedSource === project.video && <p className="video-error" role="status">视频暂时无法播放，<a href={project.video} target="_blank" rel="noopener noreferrer">单独打开视频</a>。</p>}
     </div>
     <div className="dialog-content">
-      <div className="dialog-film-meta"><p className="overline">{project.kind === 'clip' ? 'CLIP' : 'FILM'} {project.number} / {project.category}</p><span>{project.durationLabel}</span><a href={project.video} target="_blank" rel="noopener noreferrer">单独观看 ↗</a></div>
+      <div className="dialog-film-meta"><p className="overline">{isPracticeWork(project) ? 'STUDY' : 'WORK'} {project.number} / {project.category}</p><span>{project.durationLabel}</span><a href={project.video} target="_blank" rel="noopener noreferrer">单独观看 ↗</a></div>
       <h2 id="dialog-title">{project.title}</h2><p className="dialog-summary">{project.summary}</p><p className="dialog-role">{project.responsibility}</p>
       <div className="dialog-notes">{project.notes.map((note, i) => <p key={note}><span>0{i + 1}</span>{note}</p>)}</div>
     </div>

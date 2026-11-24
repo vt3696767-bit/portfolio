@@ -6,13 +6,12 @@ export const profile = {
   phone: '18106586863',
   location: '杭州 · 余杭',
   roles: ['AI 内容生成师', 'AI 设计师', 'AIGC 编导'],
-  portrait: '/images/portrait-traveler-720.webp',
-  portraitSrcSet: '/images/portrait-traveler-480.webp 480w, /images/portrait-traveler-720.webp 720w, /images/portrait-traveler-890.webp 890w',
-  portraitAlt: '戴宽檐帽的旅行者彩色插画',
-  heroPoster: '/images/hero-gallery-1280.webp',
-  heroPosterSrcSet: '/images/hero-gallery-640.webp 640w, /images/hero-gallery-960.webp 960w, /images/hero-gallery-1280.webp 1280w',
-  // The arch crops a landscape still: select for its drawn width, not just the frame width.
-  heroPosterSizes: '(max-width: 720px) 800px, 1400px',
+  portrait: '/images/portrait-blue-editorial-752.webp',
+  portraitSrcSet: '/images/portrait-blue-editorial-480.webp 480w, /images/portrait-blue-editorial-752.webp 752w',
+  portraitAlt: '蓝白背景前，穿钴蓝外套、微低头看向右侧的黑发人物插画',
+  heroPoster: '/images/hero-noir-1600.webp',
+  heroPosterSrcSet: '/images/hero-noir-640.webp 640w, /images/hero-noir-960.webp 960w, /images/hero-noir-1600.webp 1600w',
+  heroPosterSizes: '(max-width: 720px) 880px, 100vw',
   heroVideo: null,
 };
 
@@ -114,6 +113,17 @@ export const projects = [
     summary: '以人物对话与剧情推进为主的竖屏短剧片段，保留完整片段与声音。',
     responsibility: '短剧片段展示',
     notes: ['按原竖屏比例播放，完整呈现画面。', '保留片段完整内容、对白与声音。'],
+  },
+  {
+    id: 'ambush-counterattack', number: '10', kind: 'clip', title: '伏击反杀', english: 'Ambush and Counterattack',
+    category: '奇幻动作练习', label: '影像片段 · 动作与剪辑',
+    image: '/images/projects/ambush-counterattack.webp', alt: '《伏击反杀》原片画面：夕光下，精灵弓手与林中对手对峙',
+    coverPosition: '40% 50%',
+    imageWidth: 1280, imageHeight: 550,
+    video: '/videos/projects/ambush-counterattack-web.mp4', duration: 45.18, durationLabel: '00:45',
+    summary: '一段发生在林间的奇幻动作练习。镜头在精灵弓手与伏击者之间切换，从林中对望推进到近距离交锋。',
+    responsibility: '奇幻动作片段练习',
+    notes: ['用林间逆光勾勒人物轮廓。', '交替使用人物近景与林间远景，交代双方的位置。', '用交错剪辑衔接对峙与反击。'],
   },
 ];
 

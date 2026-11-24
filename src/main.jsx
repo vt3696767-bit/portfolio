@@ -4,6 +4,7 @@ import './fonts.css';
 import App from './App.jsx';
 import './styles.css';
 import './motion/motion.css';
+import './editorial-sections.css';
 
 createRoot(document.getElementById('root')).render(
   <React.StrictMode><App /></React.StrictMode>,

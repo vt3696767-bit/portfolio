@@ -1,18 +1,18 @@
 /* Motion owns masks and temporary compositing only; the gallery owns its layout. */
 .hero { overflow: hidden; }
 .hero .hero-media { inset: -4% 0; }
-.hero-name-mask, .heading-mask { display: block; overflow: hidden; padding-bottom: .13em; margin-bottom: -.13em; }
-.hero-name, .heading-line { display: block; transform-origin: 0 100%; }
+.heading-mask { display: block; overflow: hidden; padding-bottom: .13em; margin-bottom: -.13em; }
+.heading-line { display: block; transform-origin: 0 100%; }
 .masthead-mask { display: block; overflow: hidden; padding: .12em .035em .13em; margin: -.12em -.035em -.13em; }
 .masthead-word { display: block; white-space: nowrap; transform-origin: 0 100%; }
 
-.opening-curtain { display: none; position: absolute; inset: 0; z-index: 5; background: var(--paper); color: var(--ink); place-items: center; pointer-events: none; }
+.opening-curtain { display: none; position: absolute; inset: 0; z-index: 5; background: var(--canvas); color: var(--paper); place-items: center; pointer-events: none; }
 .opening-identity { text-align: center; }
 .opening-mark-mask, .opening-caption-mask { display: block; overflow: hidden; }
-.opening-mark-mask { padding: .04em .15em .12em 0; font-size: clamp(10rem, 26vw, 30rem); }
-.opening-mark { display: block; font-family: var(--serif); line-height: .77; letter-spacing: -.1em; transform-origin: 50% 100%; }
+.opening-mark-mask { padding: 0 6px 16px; }
+.opening-mark { display: block; font-family: var(--sans); transform-origin: 50% 100%; }
+.opening-mark .gallery-rosette { width: clamp(92px, 12vw, 175px); height: auto; margin-inline: auto; color: var(--accent); }
 .opening-caption { display: block; font-size: .875rem; letter-spacing: .32em; line-height: 2; }
-.opening-meta { position: absolute; left: 0; right: 0; bottom: 38px; display: flex; justify-content: space-between; gap: 24px; font-size: .75rem; letter-spacing: .12em; }
 
 /* The extra image area keeps the restrained scroll parallax inside each frame. */
 .project-image .project-visual { position: absolute; inset: -5% 0; }
@@ -23,7 +23,6 @@
 }
 @media (max-width: 720px) {
   .opening-caption { font-size: .75rem; letter-spacing: .18em; }
-  .opening-meta { bottom: 26px; flex-direction: column; gap: 8px; }
 }
 @media (prefers-reduced-motion: reduce) {
   .opening-curtain { display: none !important; }

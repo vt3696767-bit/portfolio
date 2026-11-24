@@ -183,13 +183,11 @@ export function createPortfolioMotion(root, openingPlayed = { current: false }) 
       && (!window.location.hash || window.location.hash === '#home') && !openingPlayed.current;
     if (playOpening) {
       const words = [...hero.querySelectorAll('.hero-heading .heading-line')];
-      const names = [...hero.querySelectorAll('.hero-name')];
-      const english = [...hero.querySelectorAll('.hero-english')];
       const header = select('.header-inner .brand, .desktop-nav a, .header-contact, .menu-toggle');
-      const details = [...hero.querySelectorAll('.hero-eyebrow, .hero-roles, .hero-rule, .hero-intro, .hero-cta, .hero-art-caption, .hero-art-play, .hero-bottom')];
+      const details = [...hero.querySelectorAll('.hero-roles, .hero-cta, .hero-art-play')];
       const poster = hero.querySelector('.hero-poster');
-      const arch = hero.querySelector('.hero-arch');
-      const targets = [...names, ...english, ...words, ...header, ...details, poster, arch, curtain].filter(Boolean);
+      const visual = hero.querySelector('.hero-visual');
+      const targets = [...words, ...header, ...details, poster, visual, curtain].filter(Boolean);
       gsap.set(curtain, { display: 'grid', yPercent: 0 });
       opening = gsap.timeline({
         defaults: { ease: 'portfolio-settle' },
@@ -203,21 +201,15 @@ export function createPortfolioMotion(root, openingPlayed = { current: false }) 
       opening.fromTo(hero.querySelectorAll('.opening-mark'), { yPercent: 125, scaleY: .7 }, { yPercent: 0, scaleY: 1, duration: 1.05 }, 0)
         .fromTo(hero.querySelectorAll('.opening-caption'), { yPercent: 130 }, { yPercent: 0, duration: .95 }, .16)
         .to(curtain, { yPercent: -102, duration: 1.35, ease: 'portfolio-wipe' }, .85);
-      if (arch) opening.fromTo(arch, { clipPath: 'inset(100% 0% 0% 0%)' }, {
+      if (visual) opening.fromTo(visual, { clipPath: 'inset(100% 0% 0% 0%)' }, {
         clipPath: OPEN_CLIP, duration: 2.1, ease: 'portfolio-wipe',
       }, 1.05);
       if (poster) opening.fromTo(poster, { scale: 1.1 }, { scale: 1, duration: 2.75 }, .95);
-      opening.fromTo(names, {
-        yPercent: 125, xPercent: -3, scaleX: .92, scaleY: .7, transformOrigin: '0% 100%',
-      }, { yPercent: 0, xPercent: 0, scaleX: 1, scaleY: 1, duration: 1.9 }, 1.55)
-        .fromTo(english, {
-          yPercent: 80, xPercent: -10, scaleX: .88, clipPath: CLOSED_CLIP, transformOrigin: '0% 50%',
-        }, { yPercent: 0, xPercent: 0, scaleX: 1, clipPath: OPEN_CLIP, duration: 1.85 }, 1.8)
-        .fromTo(words, {
+      opening.fromTo(words, {
           yPercent: 138, xPercent: -4, scaleX: .86, scaleY: .7, skewY: 3, transformOrigin: '0% 100%',
         }, {
           yPercent: 0, xPercent: 0, scaleX: 1, scaleY: 1, skewY: 0, duration: 1.65, stagger: .16,
-        }, 2.05)
+        }, 1.92)
         .fromTo(header, { y: -36, clipPath: CLOSED_CLIP }, { y: 0, clipPath: OPEN_CLIP, duration: 1.2, stagger: .06 }, 1.8)
         .fromTo(details, { y: 38, clipPath: CLOSED_CLIP }, { y: 0, clipPath: OPEN_CLIP, duration: 1.25, stagger: .075 }, 2.3)
         .set(targets.filter(target => target !== curtain), { clearProps: CLEAR_ENTRY })

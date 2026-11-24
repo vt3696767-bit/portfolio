@@ -112,21 +112,28 @@ test('navigation threshold is observed and the gallery has no videos before sele
   const root = createRoot(browser.document.getElementById('root'));
   t.after(async () => { await act(async () => root.unmount()); });
   await act(async () => root.render(createElement(App)));
-  assert.equal(browser.document.querySelectorAll('.project-card').length, 9);
+  assert.equal(browser.document.querySelectorAll('.project-card').length, 10);
   assert.equal(browser.document.querySelectorAll('.project-grid').length, 2);
-  assert.equal(browser.document.querySelector('.project-grid[aria-label="完整短片"]').querySelectorAll('.project-card').length, 4);
-  assert.equal(browser.document.querySelector('.project-grid[aria-labelledby="clips-title"]').querySelectorAll('.project-card').length, 5);
-  assert.match(browser.document.querySelector('.work-footnote').textContent, /09 SELECTED WORKS \/ 04 FILMS \+ 05 CLIPS/);
+  const completeIds = ['cat-cafe', 'lost-memory', 'combat-study', 'short-drama-xingjuguanghe'];
+  const practiceIds = ['fashion-film', 'eastern-fantasy-live', 'song-dynasty', 'otherworld-fantasy', 'western-fantasy', 'ambush-counterattack'];
+  for (const [id, projectIds] of [['complete-works', completeIds], ['practice-works', practiceIds]]) {
+    const collection = browser.document.getElementById(id);
+    assert.equal(collection.getAttribute('aria-labelledby'), `${id}-title`);
+    assert.deepEqual([...collection.querySelectorAll('.project-unit')].map(unit => unit.classList[1]), projectIds.map(projectId => `project-${projectId}`));
+    assert.match(browser.document.querySelector(`.project-collection-links a[href="#${id}"]`).textContent, new RegExp(`${projectIds.length} 部$`));
+  }
+  const galleryProjects = [...completeIds, ...practiceIds].map(id => projects.find(project => project.id === id));
+  assert.match(browser.document.querySelector('.work-footnote').textContent, /10 SELECTED WORKS/);
   assert.deepEqual([...browser.document.querySelectorAll('.stats > div > p')].slice(0, 3).map(element => element.firstChild.textContent), ['07', '04', '03']);
   for (const [index, card] of [...browser.document.querySelectorAll('.project-card')].entries()) {
-    const project = projects[index];
+    const project = galleryProjects[index];
     const cover = card.querySelector('img');
     assert.equal(cover.getAttribute('src'), project.image);
     assert.equal(cover.getAttribute('loading'), 'lazy');
     assert.equal(cover.getAttribute('width'), String(project.imageWidth));
     assert.equal(cover.getAttribute('height'), String(project.imageHeight));
-    assert.match(card.querySelector('.cover-note').textContent, project.kind === 'clip' ? /VISUAL CLIP$/ : /FULL FILM$/);
-    assert.match(card.querySelector('.project-top').textContent, project.kind === 'clip' ? /^CLIP \/ / : /^FILM \/ /);
+    assert.equal(card.querySelector('.cover-note').textContent, project.durationLabel);
+    assert.match(card.querySelector('.project-top').textContent, project.duration < 60 ? /^STUDY \/ / : /^WORK \/ /);
   }
   assert.equal(browser.document.querySelectorAll('video').length, 0);
   assert.deepEqual([...browser.document.querySelectorAll('main section[id]')].map(section => section.id), ['home', 'work', 'about', 'approach', 'contact']);
@@ -152,8 +159,9 @@ test('navigation threshold is observed and the gallery has no videos before sele
   assert.equal(hero.getAttribute('srcset'), profile.heroPosterSrcSet);
   assert.equal(hero.getAttribute('sizes'), profile.heroPosterSizes);
   assert.equal(hero.getAttribute('fetchpriority'), 'high');
-  assert.ok(browser.document.querySelector('.hero-arch').contains(hero));
-  assert.equal(browser.document.querySelector('h1').textContent, profile.name);
+  assert.ok(browser.document.querySelector('.hero-visual').contains(hero));
+  assert.equal(browser.document.querySelector('h1').textContent, '让想象，成为画面。');
+  assert.equal(browser.document.querySelector('.brand-text').textContent, profile.name);
   assert.equal(browser.document.querySelectorAll('h1').length, 1);
   await act(async () => browser.document.querySelector('.music-toggle').click());
   assert.equal(audio.getAttribute('src'), backgroundMusic.src);
@@ -164,15 +172,16 @@ test('navigation threshold is observed and the gallery has no videos before sele
   await act(async () => browser.document.querySelector('.music-settings-close').click());
   assert.equal(browser.document.querySelector('.music-settings'), null);
   for (const [index, card] of [...browser.document.querySelectorAll('.project-card')].entries()) {
+    const project = galleryProjects[index];
     mediaCalls.length = 0;
     await act(async () => card.click());
     const video = browser.document.querySelector('video');
-    assert.equal(video.getAttribute('src'), projects[index].video);
-    assert.equal(video.getAttribute('poster'), projects[index].image);
-    assert.equal(browser.document.querySelector('.project-dialog').classList.contains('is-portrait'), projects[index].imageHeight > projects[index].imageWidth);
-    assert.equal(browser.document.querySelector('.dialog-player').style.getPropertyValue('--video-aspect'), `${projects[index].imageWidth} / ${projects[index].imageHeight}`);
-    assert.equal(video.getAttribute('aria-label'), `《${projects[index].title}》${projects[index].kind === 'clip' ? '影像片段' : '完整短片'}`);
-    assert.match(browser.document.querySelector('.dialog-film-meta').textContent, projects[index].kind === 'clip' ? /^CLIP / : /^FILM /);
+    assert.equal(video.getAttribute('src'), project.video);
+    assert.equal(video.getAttribute('poster'), project.image);
+    assert.equal(browser.document.querySelector('.project-dialog').classList.contains('is-portrait'), project.imageHeight > project.imageWidth);
+    assert.equal(browser.document.querySelector('.dialog-player').style.getPropertyValue('--video-aspect'), `${project.imageWidth} / ${project.imageHeight}`);
+    assert.equal(video.getAttribute('aria-label'), `《${project.title}》视频`);
+    assert.match(browser.document.querySelector('.dialog-film-meta').textContent, project.duration < 60 ? /^STUDY / : /^WORK /);
     assert.equal(browser.document.querySelector('.music-toggle').getAttribute('aria-pressed'), 'false');
     assert.ok(mediaCalls.indexOf('audio:pause') < mediaCalls.indexOf('video:play'));
     await act(async () => browser.document.querySelector('.dialog-close').click());

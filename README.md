@@ -77,7 +77,7 @@ Cloudflare Pages 的[单个静态文件上限为 25 MiB](https://developers.clou
 ## 真实信息与示意素材
 
 - 姓名、电话、邮箱、教育与工作经历来自提供的简历。短片数据按用户最新补充更新为 7 部，其中 4 部超过 1 分钟、3 部约 30 秒。
-- 个人图片使用用户提供的彩色旅行者插画，完整保留原图与色彩。简历中提取的原始彩色头像仍保留为备用素材。
+- 个人图片使用已确认裁剪的蓝白角色插画，提供两种 WebP 尺寸。此前的彩色旅行者插画和简历头像保留为备用素材。
 - 项目主题来自简历及用户提供的四部短片（猫咖、失忆、动作与时尚）与四个影像片段（东方奇幻、宋韵、异世界奇幻与西式奇幻）。新增片段单独分组，不计入已完成短片数量。未编造客户、获奖、商业合作或播放量。
 - 精选作品使用真实原片与原片截图。此前由内置 ImageGen 生成的三张示意图保留为备用，不再用于精选作品卡片。
 - 首页拱门使用《西式奇幻》原片 37.21 秒的彩色截图，另导出 640 / 960 / 1280px WebP。旧幻想头图及原图保留为备用素材，当前不加载。
@@ -101,10 +101,10 @@ Cloudflare Pages 的[单个静态文件上限为 25 MiB](https://developers.clou
 | 背景音乐控件、音量和样式 | `src/components/BackgroundMusic/` |
 | 音乐加载、播放暂停与视频避让 | `src/media/backgroundMusic.js` |
 | 背景音乐网页版本 | `public/audio/isekai-life.mp3` |
-| 四部完整短片与四个影像片段的网页播放版本 | `public/videos/projects/` |
-| 九个作品的原片截图封面 | `public/images/projects/` |
-| 当前个人图片及多尺寸版本 | `public/images/portrait-traveler-*.webp` |
-| 当前首页拱门画面及多尺寸版本 | `public/images/hero-gallery-*.webp` |
+| 完整作品与练习作品的网页播放版本 | `public/videos/projects/` |
+| 十个作品的原片截图封面 | `public/images/projects/` |
+| 当前个人图片及多尺寸版本 | `public/images/portrait-blue-editorial-*.webp` |
+| 当前首页电影场景及多尺寸版本 | `public/images/hero-noir-*.webp` |
 | 原始图片、音乐、备用示意图、上一版视频 | `assets/source/`（不进入发布包） |
 | 图像生成方式、完整提示词、原片来源与转换记录 | `asset-manifest.json` |
 

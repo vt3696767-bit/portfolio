@@ -37,6 +37,26 @@
     }
   ],
   "profileImage": {
+    "source": "ImageGen character illustration, cropped as approved by user",
+    "projectAsset": "/images/portrait-blue-editorial-752.webp",
+    "width": 752,
+    "height": 940,
+    "variants": [
+      {
+        "path": "/images/portrait-blue-editorial-480.webp",
+        "width": 480,
+        "height": 600,
+        "bytes": 17030
+      },
+      {
+        "path": "/images/portrait-blue-editorial-752.webp",
+        "width": 752,
+        "height": 940,
+        "bytes": 31032
+      }
+    ]
+  },
+  "previousProfileImage": {
     "source": "user-provided illustration",
     "projectAsset": "/images/portrait-traveler-720.webp",
     "width": 720,
@@ -111,6 +131,7 @@
     "originalAsset": "assets/source/images/hero-fantasy.png"
   },
   "galleryHero": {
+    "status": "previous light layout retained as a backup",
     "source": "user-supplied Western fantasy film, original-color frame",
     "sourceFilm": "western-fantasy",
     "sourceFile": "F:/Midjourney-win-v2.5.2免安装版本/视频/作品集/2.5测试镜头/西式奇幻.mp4",
@@ -118,7 +139,7 @@
     "projectAsset": "/images/hero-gallery-1280.webp",
     "width": 1280,
     "height": 720,
-    "mode": "static responsive still inside CSS arch; video loads on click only",
+    "mode": "static responsive widescreen still; video loads on click only",
     "variants": [
       {
         "path": "/images/hero-gallery-640.webp",
@@ -141,6 +162,17 @@
     ],
     "designReference": "04B-西方古典画廊-镂空符号深化.png, approved by user on 2026-10-21",
     "ornaments": "native static SVG quatrefoil and S maker mark; no generated webpage bitmap used as background"
+  },
+  "cinematicHero": {
+    "source": "built-in image generation, reconstructed from the user-selected dark mockup",
+    "projectAsset": "/images/hero-noir-1600.webp",
+    "prompt": "Reconstruct only the clean hero artwork from the chosen mockup. Retain midnight-blue vaulted stone ruins, cold low fog, a lone silhouette, and one diagonal shaft of warm light. Keep the left side quiet for live text. Remove all webpage elements and extend the scene to 16:9.",
+    "placement": "decorative full-width hero background, separate from the original project footage",
+    "variants": [
+      { "path": "/images/hero-noir-640.webp", "width": 640, "height": 360, "bytes": 14954 },
+      { "path": "/images/hero-noir-960.webp", "width": 960, "height": 540, "bytes": 29578 },
+      { "path": "/images/hero-noir-1600.webp", "width": 1600, "height": 900, "bytes": 65572 }
+    ]
   },
   "projectFilms": [
     {
@@ -453,6 +485,50 @@
       },
       "importDate": "2026-10-31",
       "coverPosition": "50% 33.0673%"
+    },
+    {
+      "id": "ambush-counterattack",
+      "kind": "clip",
+      "title": "伏击反杀",
+      "source": "F:\\Midjourney-win-v2.5.2免安装版本\\视频\\精灵\\伏击反杀.mp4",
+      "sourceBytes": 63425967,
+      "sourceSha256": "afb1cb7339619531b11ffca5bca341a5879a1934dcc5637ee322ac2036505c26",
+      "sourceDurationSeconds": 45.16,
+      "sourceSize": [
+        1678,
+        720
+      ],
+      "projectAsset": "/videos/projects/ambush-counterattack-web.mp4",
+      "bytes": 21249653,
+      "width": 1280,
+      "height": 550,
+      "durationSeconds": 45.18,
+      "fps": 60,
+      "codec": "H.264 / AAC",
+      "audio": "AAC 128kbps stereo, re-encoded from original audio",
+      "fastStart": true,
+      "webPlaybackVersion": true,
+      "sourceFileModified": false,
+      "completeDecodePassed": true,
+      "sha256": "c7ac650be21b3dc4b381e77ee41bf372b5090c3935e15c17fb99c5dd2be95ba9",
+      "poster": "/images/projects/ambush-counterattack.webp",
+      "posterSize": [
+        1280,
+        550
+      ],
+      "posterBytes": 43026,
+      "posterTimestampSeconds": 39.85,
+      "coverPosition": "40% 50%",
+      "cloudflarePagesCompatible": true,
+      "completeDurationPreserved": true,
+      "encoding": {
+        "mode": "two-pass average bitrate",
+        "videoBitrateKbps": 3600,
+        "audioBitrateKbps": 128,
+        "peakVideoBitrateKbps": 5500,
+        "preset": "medium"
+      },
+      "importDate": "2026-11-24"
     }
   ],
   "archivedAssets": [

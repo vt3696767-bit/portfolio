@@ -6,6 +6,7 @@ const quatrefoil = 'M100 100a100 100 0 0 1 200 0 100 100 0 0 1 0 200 100 100 0 0
 export function RosetteMark({ className = '', ...props }) {
   return <svg className={`gallery-rosette ${className}`} viewBox="-12 -12 424 424" fill="none" aria-hidden="true" focusable="false" {...props}>
     <path d={quatrefoil} stroke="currentColor" strokeWidth="9" />
+    <path d={quatrefoil} transform="translate(19 19) scale(.905)" stroke="currentColor" strokeWidth="4" />
     <text x="200" y="274" textAnchor="middle" fill="currentColor" fontFamily="Cormorant Garamond, Georgia, serif" fontSize="216">S</text>
   </svg>;
 }
@@ -21,6 +22,6 @@ export const GalleryOrnament = memo(function GalleryOrnament({ position }) {
   </svg>;
 });
 
-export function GalleryDivider() {
-  return <div className="gallery-divider" aria-hidden="true"><span /><RosetteMark /><span /></div>;
+export function GalleryDivider({ className = '' }) {
+  return <div className={`gallery-divider ${className}`} aria-hidden="true"><span /><RosetteMark /><span /></div>;
 }

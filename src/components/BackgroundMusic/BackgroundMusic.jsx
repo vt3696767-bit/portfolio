@@ -41,7 +41,7 @@ export default memo(function BackgroundMusic({ track, suspended = false }) {
   }}>
     <audio ref={audio} preload="none" loop aria-hidden="true" />
     {expanded && <div className="music-settings" id={panelId}>
-      <div className="music-settings-heading"><p>背景音乐<span>{track.durationLabel} · 循环播放</span></p><button type="button" className="music-settings-close" onClick={closeSettings} aria-label="关闭音乐设置">×</button></div>
+      <div className="music-settings-heading"><p>{track.title}<span>{track.durationLabel} · 循环播放</span></p><button type="button" className="music-settings-close" onClick={closeSettings} aria-label="关闭音乐设置">×</button></div>
       <label htmlFor={sliderId}>音量<output htmlFor={sliderId}>{volume}%</output></label>
       <input id={sliderId} type="range" min="0" max="100" step="1" value={volume} aria-label="背景音乐音量" style={{ '--music-volume': `${volume}%` }} onChange={event => player.current?.setVolume(Number(event.target.value) / 100)} />
     </div>}
